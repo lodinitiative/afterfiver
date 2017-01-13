@@ -38,13 +38,10 @@
 					<img src="assets/img/menu/icon-capture.svg" alt="">
 					<span>Japanese<br>Capture</span>
 				</a>
-				<a class="m-menu__item2" href="index_ja.html">
-					<span>日本語版</span>
+				<a class="m-menu__item2" href="index.html">
+					<!--<img src="assets/img/menu/icon-watch.svg" alt="">-->
+					<span>English</span>
 				</a>
-	<!--			<a class="m-menu__item" data-menu-target="content-tv">
-					<img src="assets/img/menu/icon-watch.svg" alt="">
-					<span>Watch TV</span>
-				</a>-->
 			</div>
 		</div>
 
@@ -67,34 +64,28 @@
 
 									<div class="l-section">
 
-										<h2>Choose Plan</h2>
+										<h2>プランを選択</h2>
 										<select name="plan">
 											<!--<option value="restaurant">Restaurant</option>-->
-											<option value="">All</option>
-											<option value="ishk:category &quot;Sightseeing&quot;;">Sightseeing</option>
-											<option value="ishk:category &quot;Culture&quot;;">Culture</option>
-											<option value="ishk:category &quot;Nature&quot;;">Nature</option>
-											<option value="ishk:category &quot;Shopping&quot;;">Shopping</option>
-											<option value="ishk:category &quot;Museum&quot;;">Museum</option>
-											<option value="ishk:category &quot;Activities&quot;;">Activities</option>
-											<!--<option value="Culture">Culture</option>
-											<option value="Nature">Nature</option>
-											<option value="Sightseeing">Sightseeing</option>
-											<option value="Shopping">Shopping</option>
-											<option value="Museum">Museum</option>
-											<option value="Activities">Activities</option>
-											<option value="karaoke">Karaoke</option>-->
+											<option value="">すべて</option>
+											<option value="ishk:category &quot;Sightseeing&quot;;">観光施設</option>
+											<option value="ishk:category &quot;Culture&quot;;">文化</option>
+											<option value="ishk:category &quot;Nature&quot;;">自然</option>
+											<option value="ishk:category &quot;Shopping&quot;;">買い物</option>
+											<option value="ishk:category &quot;Museum&quot;;">美術館・博物館</option>
+											<option value="ishk:category &quot;Activities&quot;;">アクティビティ</option>
+											<!--<option value="karaoke">Karaoke</option>-->
 										</select>
 
 									</div>
 
 									<div class="l-section">
 
-										<h2>Start Location</h2>
+										<h2>出発地点</h2>
 
 										<div class="l-section-part _layout1">
 											<a  id="start-get-current-location" class="m-button--get-location link-current-latlng">
-												Get Current Location
+												現在地を取得する
 											</a>
 										</div>
 
@@ -102,14 +93,14 @@
 											<div><textarea id="current-location-start__textarea" class="js-location-textarea" cols="" rows="2"></textarea></div>
 											<div>
 												<a class="m-button m-button--favorite" href="#">
-													Add to List
+													地点リストに追加
 												</a>
 											</div>
 										</div>
 
 										<div class="l-section-part">
 											<div class="_layout2">
-												<h3>Spot</h3>
+												<h3>スポット</h3>
 												<select class="spot-list" name="startSpotList">
 													<option value="Kobe Station">Kobe Station</option>
 													<option value="Sannomiya Station">Sannomiya Station</option>
@@ -125,11 +116,11 @@
 
 									<div class="l-section">
 
-										<h2>Destination</h2>
+										<h2>到着地点</h2>
 
 										<div class="l-section-part _layout1">
 											<a id="dest-get-current-location" class="m-button--get-location link-current-latlng">
-												Get Current Location
+												現在地を取得する
 											</a>
 										</div>
 
@@ -137,14 +128,14 @@
 											<div><textarea id="current-location-dest__textarea" class="js-location-textarea" cols="" rows="2"></textarea></div>
 											<div>
 												<a class="m-button m-button--favorite" href="#">
-													Add to List
+													地点リストに追加
 												</a>
 											</div>
 										</div>
 
 										<div class="l-section-part">
 											<div class="_layout2">
-												<h3>Spot</h3>
+												<h3>スポット</h3>
 												<select class="spot-list" name="destSpotList">
 													<option value="Kobe Station">Kobe Station</option>
 													<option value="Sannomiya Station">Sannomiya Station</option>
@@ -158,7 +149,7 @@
 
 										<div class="l-section-part">
 											<div class="_layout2">
-												<h3>Projected journey time</h3>
+												<h3>利用できる時間</h3>
 												<select name="destArriveBy">
 													<option value="30">30 min</option>
 													<option value="60">60 min</option>
@@ -179,7 +170,7 @@
 
 									<div class="l-section">
 
-										<h2>Transportation</h2>
+										<h2>移動手段</h2>
 
 										<div class="_layout4">
 											<div class="_layout4__inner">
@@ -189,13 +180,13 @@
 													<label>
 														<input type="radio" name="routeMode" value="drive" checked="checked">
 														<span class="_layout-radio-group__icon"></span>
-														<span>Driving</span>
+														<span>車</span>
 													</label>
 
 													<label>
 														<input type="radio" name="routeMode" value="walk">
 														<span class="_layout-radio-group__icon"></span>
-														<span>Walking</span>
+														<span>徒歩</span>
 													</label>
 
 												</div>
@@ -209,7 +200,7 @@
 									<div class="l-section">
 										<div class="l-section-part">
 											<a class="m-ui-button m-ui-button--search">
-												Search
+												検索
 											</a>
 										</div>
 									</div>
@@ -226,13 +217,13 @@ select  (STR(?place_name) as ?name) (STR(?place_address) as ?address) (STR(?plac
 FROM <http://data.lodosaka.jp/iswc2016hack/sightseeing>
 where
 {
-?place rdfs:label ?place_name.
-?place ishk:jaLabel ?place_name_ja;
+?place rdfs:label ?place_name_ja.
+?place ishk:jaLabel ?place_name;
 PLANWORD
 OPTIONAL{?place ishk:nhkVOD ?vod}.
 OPTIONAL{?place ishk:nhkVODscene ?vod_sc}.
 OPTIONAL{?place schema:adress ?place_address}.
-OPTIONAL{?place rdfs:comment ?place_comment}.
+OPTIONAL{?place ishk:jaComment ?place_comment}.
 OPTIONAL{?place ishk:imageURL ?place_img_url}.
 OPTIONAL{?place ishk:fee ?place_fee}.
 OPTIONAL{?place ishk:openingHours ?place_openingHours}.
@@ -597,19 +588,19 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 													</div>
 													<div class="__item-body">
 														<dl>
-															<dt>Duration</dt>
+															<dt>所要時間</dt>
 															<dd id="list-map-duration"></dd>
 														</dl>
 														<dl>
-															<dt>Distance</dt>
+															<dt>距離</dt>
 															<dd id="list-map-distance"></dd>
 														</dl>
 														<dl>
-															<dt>Stay Time</dt>
+															<dt>滞在時間</dt>
 															<dd id="list-map-time"></dd>
 														</dl>
 														<dl>
-															<dt>Average price</dt>
+															<dt>平均予算</dt>
 															<dd id="list-map-average-price"></dd>
 														</dl>
 													</div>

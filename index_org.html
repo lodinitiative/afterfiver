@@ -38,13 +38,10 @@
 					<img src="assets/img/menu/icon-capture.svg" alt="">
 					<span>Japanese<br>Capture</span>
 				</a>
-				<a class="m-menu__item2" href="index_ja.html">
-					<span>日本語版</span>
-				</a>
-	<!--			<a class="m-menu__item" data-menu-target="content-tv">
+				<a class="m-menu__item" data-menu-target="content-tv">
 					<img src="assets/img/menu/icon-watch.svg" alt="">
 					<span>Watch TV</span>
-				</a>-->
+				</a>
 			</div>
 		</div>
 
@@ -66,24 +63,12 @@
 								<div class="content-body__inner">
 
 									<div class="l-section">
-
+									
 										<h2>Choose Plan</h2>
 										<select name="plan">
-											<!--<option value="restaurant">Restaurant</option>-->
-											<option value="">All</option>
-											<option value="ishk:category &quot;Sightseeing&quot;;">Sightseeing</option>
-											<option value="ishk:category &quot;Culture&quot;;">Culture</option>
-											<option value="ishk:category &quot;Nature&quot;;">Nature</option>
-											<option value="ishk:category &quot;Shopping&quot;;">Shopping</option>
-											<option value="ishk:category &quot;Museum&quot;;">Museum</option>
-											<option value="ishk:category &quot;Activities&quot;;">Activities</option>
-											<!--<option value="Culture">Culture</option>
-											<option value="Nature">Nature</option>
-											<option value="Sightseeing">Sightseeing</option>
-											<option value="Shopping">Shopping</option>
-											<option value="Museum">Museum</option>
-											<option value="Activities">Activities</option>
-											<option value="karaoke">Karaoke</option>-->
+											<option value="restaurant">Restaurant</option>
+											<option value="sightseeing">Sightseeing</option>
+											<option value="karaoke">Karaoke</option>
 										</select>
 
 									</div>
@@ -97,7 +82,7 @@
 												Get Current Location
 											</a>
 										</div>
-
+										
 										<div id="current-location-start__div" class="l-section-part _layout3 current-locatoin__div">
 											<div><textarea id="current-location-start__textarea" class="js-location-textarea" cols="" rows="2"></textarea></div>
 											<div>
@@ -126,7 +111,7 @@
 									<div class="l-section">
 
 										<h2>Destination</h2>
-
+										
 										<div class="l-section-part _layout1">
 											<a id="dest-get-current-location" class="m-button--get-location link-current-latlng">
 												Get Current Location
@@ -175,8 +160,8 @@
 										</div>
 
 									</div>
-
-
+									
+									
 									<div class="l-section">
 
 										<h2>Transportation</h2>
@@ -223,12 +208,11 @@ prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 prefix schema: <http://schema.org/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 select  (STR(?place_name) as ?name) (STR(?place_address) as ?address) (STR(?place_comment) as ?comment) (STR(?place_img_url) as ?img_url)  (STR(?place_fee) as ?fee)   (STR(?place_openingHours) as ?openingHours) (STR(?place_keyword) as ?keyword) (STR(?place_stay_time) as ?stay_time) (STR(?lat) as ?place_lat) (STR(?long) as ?place_long) (STR(?place_category) as ?category) ?place (STR(?place_name_ja) as ?name_ja) ?vod ?vod_sc ?web
-FROM <http://data.lodosaka.jp/iswc2016hack/sightseeing>
+FROM <http://data.lodosaka.jp/iswc2016hack/PLANWORD>
 where
 {
 ?place rdfs:label ?place_name.
 ?place ishk:jaLabel ?place_name_ja;
-PLANWORD
 OPTIONAL{?place ishk:nhkVOD ?vod}.
 OPTIONAL{?place ishk:nhkVODscene ?vod_sc}.
 OPTIONAL{?place schema:adress ?place_address}.
@@ -263,7 +247,7 @@ OPTIONAL{?place foaf:homepage ?web}
 						<div class="content-head">
 							<div class="m-sub-navigation">
 								<div>
-									<a class="__link-back" href="#"></a>  <span id="spot-search-count"></span>件	<!-- add20161218 -->
+									<a class="__link-back" href="#"></a>
 								</div>
 								<div>
 									<select id="m-list-sort" name="sort">
@@ -285,13 +269,13 @@ OPTIONAL{?place foaf:homepage ?web}
 									<div class="m-list">
 										<!-- list content -->
 									</div>
-
+									
 									<div class="spot-list-more">
 										<a class="m-ui-button m-ui-button--more">
 											Show more
 										</a>
 									</div>
-
+									
 									<div class="copyright">
 										Developed through the
 										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
@@ -316,7 +300,7 @@ OPTIONAL{?place foaf:homepage ?web}
 						<div class="content-body">
 							<div class="content-body__scroll">
 								<div class="content-body__inner">
-
+								
 									<div class="__slider">
 										<div id="spot-image" class="__slide-content">
 											<div class="__thumb"><div class="__thumb-image" style="background-image:url(assets/img/dummy/slide-itemsss.jpg);"></div></div>
@@ -357,7 +341,7 @@ OPTIONAL{?place foaf:homepage ?web}
 										<p id="spot-comment-desc">
 										</p>
 									</div>
-
+									
 									<div id="spot-web" class="l-section __web-link">
 											<h2>web site</h2>
 											<div><a href="#" target="_blank"></a></div>
@@ -373,38 +357,38 @@ OPTIONAL{?place foaf:homepage ?web}
 									<!-- For interview  -->
 										<form method="get" action="http://dbpedia.org/sparql/" target="result" id="spot-templ-api" style="display:none" >
 										<textarea name="query" cols="100" rows="30"  hidden >
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
 PREFIX dbo: <http://dbpedia.org/ontology/>
- PREFIX dbr: <http://dbpedia.org/property/>
+ PREFIX dbr: <http://dbpedia.org/property/>  
 SELECT distinct ?abstract
-WHERE {
-
+WHERE { 
+ 
   ?s rdfs:label "Temple"@en.
-?s dbo:abstract ?abstract .
-FILTER (lang(?abstract) = "en") .
+?s dbo:abstract ?abstract . 
+FILTER (lang(?abstract) = "en") .  
 
 } LIMIT 1
 </textarea>
 										</form>
-
+										
 										<form method="get" action="http://dbpedia.org/sparql/" target="result" id="spot-buddhism-api" style="display:none" >
 										<textarea name="query" cols="100" rows="30"  hidden >
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX dct: <http://purl.org/dc/terms/> 
 PREFIX dbo: <http://dbpedia.org/ontology/>
- PREFIX dbr: <http://dbpedia.org/property/>
+ PREFIX dbr: <http://dbpedia.org/property/>  
 SELECT distinct ?abstract
-WHERE {
-
+WHERE { 
+ 
   ?s rdfs:label "Buddhism"@en.
-?s dbo:abstract ?abstract .
-FILTER (lang(?abstract) = "en") .
+?s dbo:abstract ?abstract . 
+FILTER (lang(?abstract) = "en") .  
 
 } LIMIT 1
 </textarea>
 										</form>
-
+										
 									<div id="spot-interview-content" style="display:none;">
 										<div id="spot-temple" class="l-section">
 											<h2>information about Temple</h2>
@@ -545,18 +529,18 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 }
 </textarea>
 										</form>
-
+										
 										<div id="spot-related-video-list" class="__video">
 											<!-- vide content -->
 										</div>
-
+										
 									</div>
 
 									<div class="copyright">
 										Developed through the
 										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
 									</div>
-
+									
 								</div>
 							</div>
 						</div>
@@ -713,7 +697,7 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 									<img src="http://i.yimg.jp/images/yjdn/yjdn_attbtn1_125_17.gif" title="Webサービス by Yahoo! JAPAN" alt="Web Services by Yahoo! JAPAN" width="125" height="17" border="0" style=""></a>
 									<!-- End Yahoo! JAPAN Web Services Attribution Snippet -->
 									</div>
-
+									
 									<div>
 										<div class="copyright">
 										Developed through the
@@ -853,7 +837,7 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 											than a Hiroshima or Kansai okonomiyaki.
 										</div>
 									</div>
-
+									
 									<!-- 特定文字列（「親子丼」「おやこどん」「おやこ丼」） -->
 									<div id="capture-special-content" style="display:none;">
 										<!-- recipe1  -->
@@ -863,7 +847,7 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 												<!-- recipe item  -->
 											</div>
 										</div>
-
+										
 										<!-- recipe 2  -->
 										<div class="l-section  l-section--nb">
 											<h2>Other "Don" Recipe from NHK</h2>
@@ -871,7 +855,7 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 												<!-- recipe item  -->
 											</div>
 										</div>
-
+										
 										<!-- recipe3  -->
 										<div class="l-section  l-section--nb">
 											<h2>Recipe using Chicken and egg</h2>
@@ -963,8 +947,8 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 				</div>
 				<!-- Japanese Capture END -->
 
-
-
+	
+	
 				<!-- Watch TV START -->
 				<div class="m-menu-target" data-menu-name="content-tv">
 					<!-- content start -->
@@ -977,7 +961,7 @@ BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
 							<div class="content-body__scroll">
 								<!-- content-body__inner -->
 								<div class="content-body__inner">
-
+								
 										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-onair-api" style="display:none" >
 										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
 										<textarea name="query" cols="100" rows="30"  hidden >
@@ -1022,7 +1006,7 @@ LIMIT 1
 									<div class="__next-video">
 
 										<div class="__next-video__head">
-
+										
 										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-next-api" style="display:none">
 										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
 										<textarea name="query" cols="100" rows="30"  hidden >

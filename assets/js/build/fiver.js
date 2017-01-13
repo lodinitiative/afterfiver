@@ -1,4 +1,4 @@
-﻿var Fiver = {
+var Fiver = {
   firstView: false,
   notRouteSearch : false,
   displayClass: {
@@ -8,22 +8,24 @@
     listMap: '.content-fiver--list-map',
     spotMap: '.content-fiver--spot-map',
   },
-  
+
   targetMapId: {
     list: '#__map-list',
     spot: '#__map-spot',
   },
-  
+
   spotStorageKey: 'addSpotLists',
-  getgeoUrl: 'https://lodosaka.heteml.jp/lodosaka.jp/afterfiver/getgeo.html',
+  getgeoUrl: 'https://lodosaka.heteml.jp/lodosaka.jp/afterfiver/osaka/getgeo.html',
   listItemDom: $('.content-fiver--list .m-list'),
   startLocationDom: $('#current-location-start__textarea'),
   destLocationDom: $('#current-location-dest__textarea'),
-  
+
+  rooturl: 'http://afterfiver.lodosaka.jp/',  //add20161218
+
   // option
   drawItemNum: 5000,
   listNum: 10,
-  
+
   defaultAjaxOption: {
     cache:    true,
     //crossDomain: true,
@@ -35,18 +37,11 @@
   },
 
   listForDefaultSpot: [
-    {address: "Kobe International Conference Center", latlng: '34.666241,135.21301'},
-    {address: "Sannomiya Station", latlng: '34.694483,135.195025'},
-    {address: "Motomachi Station", latlng: '34.689524,135.187327'},
-    {address: "Kobe Station",      latlng: '34.679766,135.177993'}, 
-    {address: "Shin-Kobe Station", latlng: '34.70562,135.194922'},
     {address: "Osaka Station",     latlng: '34.702485,135.495951'},
     {address: "Kansai International Airport",latlng: '34.427222,135.243889'},
     {address: "Osaka International Airport(Itami Airport)", latlng: '34.791486,135.440457'},
-    {address: "Mt. Rokko",         latlng: '34.777858,135.263726'},
-    {address: "Port of kobe",      latlng: '34.685998,135.211315'}
   ],
-  
+
   logEvent: {
     tab:    'mainpageShow',
     search: 'search',
@@ -59,30 +54,30 @@
     mapAppDest: 'MapDest',
     weblink: 'websiteSelect'
   },
-  
+
   // for google
   googleMapLink: 'http://maps.google.co.jp/maps?',
   googleCustomsearchApi: 'https://www.googleapis.com/customsearch/v1?',
-  googleGeocodeApi: 'https://maps.google.com/maps/api/geocode/json?', 
+  googleGeocodeApi: 'https://maps.google.com/maps/api/geocode/json?',
   googleApiKey: {
-    serverId: '******',
-    engineId: '******'
+    serverId: '********',
+    engineId: '********'
   },
-  
+
   googleMapIcon: {
     start: 'assets/img/map_start.png',
     dest:  'assets/img/map_dest.png',
     target: 'assets/img/map_point.png',
     point: 'assets/img/map_point_gray.png',
   },
-  
+
   googleMapOptions: {
     zoom: 14,
-    center: new google.maps.LatLng(34.706417,135.195758),
+    center: new google.maps.LatLng(34.702485,135.495951),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
   },
-  
+
   googleDirectionOption: {
     travelMode:        google.maps.DirectionsTravelMode.DRIVING,
     unitSystem:        google.maps.DirectionsUnitSystem.METRIC,
@@ -90,13 +85,13 @@
     avoidHighways:     false,
     avoidTolls:        false,
   },
-  
+
   infoWindow: new google.maps.InfoWindow(),
   directionsService: new google.maps.DirectionsService(),
   directionsDisplay: null,
   map: null,
   markers: [],
-  
+
   // for local data
   defaultSettingData: {
     plan: '',
@@ -111,7 +106,7 @@
       geo: {lat: 0, lng: 0},
     },
   },
-  
+
   settingData: null,
   lodData: null,
   lodDataOrigne: null,
@@ -129,23 +124,24 @@
   // $.ready、メニュータブ選択時に呼び出し
   init: function() {
     var self = this;
-    
+
     self.sendLog(self.logEvent.tab);
-    
+
     // 初回のみ実行
     if (!this.firstView) {
       this.firstView = true;
       this.bindAction();
       this.initLocation();
-      this.setPulldownForSpots();
+//      this.setPulldownForSpots();
     }
+    this.setPulldownForSpots(); //add20161218
     this.showSettingDisplay();
   },
-  
+
   initLocation: function() {
     var self = this;
     var type = 'start,dest'.split(',');
-    
+
     // latlngを元に住所を検索
     var fetchAddress = function(latlng, type) {
       self.fetchGoogleGeoodeApi(latlng, 'latlng')
@@ -157,11 +153,11 @@
           self.error();
         });
     };
-    
+
     // 要素に住所を代入
     var setAddress = function(address, type){
       //visibleCurrentLocatoin(type, true);
-      
+
       $.cookie(self.retCookieNameForAddress(type), address);
       self.setCurrentAddress(type, address);
     };
@@ -176,21 +172,21 @@
           target = '#current-location-dest__div';
           break;
       }
-      
+
       if (bool) {
         $(target).show();
       } else {
         $(target).hide();
       }
     };
-    
+
     // Cookie情報を元に、検索、表示処理
     for (var i = 0; i < type.length; i++) {
       var curType = type[i];
       if (this.isGeolocationApi()) {
         var curAddr   = this.retAddressFromCookie(curType);
         var curLatlng = this.retLatlngFromCookie(curType);
-        
+
         // 現在地の住所情報がCoogieに無ければ取得。緯度経度情報も無ければ枠を非表示
         if (curAddr) {
           setAddress(curAddr, curType);
@@ -217,7 +213,7 @@
         break;
     }
   },
-  
+
   //========================================================
   // display
   //========================================================
@@ -242,11 +238,11 @@
   },
   showListDisplay: function() {
     this.loader(false);
-    
+
     this.offListItemAction();
     this.onListItemAction();
     this.switchDisplayDom(this.displayClass.list, true);
-    
+
     var spots = [];
     var items = this.retLodItems();
     for (var i = 0; i < items.length; i++) {
@@ -261,7 +257,7 @@
     this.setHtmlListDom();
     this.offListItemAction();
     this.onListItemAction();
-    
+
     // visible more button
     if (this.routeCountup < this.sortedData.length) {
       $('.spot-list-more').show();
@@ -281,19 +277,19 @@
         tgt.hide();
       }
     };
-    
+
     var display = function() {
       self.loader(false);
       self.setHtmlSpotDescription();
       self.switchDisplayDom(self.displayClass.spot);
       self.onSpotItemAction();
-      
+
       //項目の表示制御
       visibleTgt($('#spot-search-image'), self.retSpotImageItems());
       visibleTgt($('#spot-related'), self.retSpotVideoItems());
       visibleTgt($('#spot-recipe'), self.spotRecipeData);
       visibleTgt($('#spot-comment'), spotData.comment);
-      
+
       self.sendLog(self.logEvent.detail, {
         spot: spotData.place,
         keyword: self.settingData.plan,
@@ -301,12 +297,12 @@
         VOD: self.retDataItemIdList($('#spot-related-video-list a')),
       });
     };
-    
+
     this.loader(true);
     this.resetHtmlSpotDom();
 
     this.setInterviewContent();
-    
+
     // 全ての通信が終わったら画面表示
     self.setHtmlSpotImageFromKeyword(spotData.name_ja).then(
         self.setHtmlSpotVideoFromKeyword(),
@@ -320,7 +316,7 @@
       display();
     });
   },
-  
+
   // 撮影用の機能「能福寺」のコンテンツ詳細で表示
   setInterviewContent: function() {
     var dfd = $.Deferred();
@@ -331,7 +327,7 @@
       'V2007239,V2007258'.split(',')
    ];
    var dbpApiTgtList = '#spot-templ-api,#spot-buddhism-api'.split(',');
-    
+
     var tgtDbpArr = '#spot-temple-dbp,#spot-buddis-dbp'.split(',');
     var tgtVodArr = '#spot-temple-list,#spot-buddis-list'.split(',');
     var tgtDiv = $('#spot-interview-content');
@@ -342,12 +338,12 @@
       return;
     }
     tgtDiv.show();
-    
+
     var ended = function(){
       dfd.resolve();
     };
-    
-    
+
+
     var fetchData = function(dbpApiTgt, vodArr, tgtDbp, tgtVod, i) {
       var dfd = $.Deferred();
       var cnt = 0;
@@ -364,12 +360,12 @@
           if(data.results.bindings && data.results.bindings.length) {
             str = data.results.bindings[0].abstract.value.substring();
           }
-          
+
           $(tgtDbp).html('<p>' + str + '</p>');
           finished();
         },function(data) {
         });
-      
+
       // VOD
       self.fetchNhkVod('clip', vodArr).then(
         function(data) {
@@ -384,16 +380,16 @@
         });
       return dfd.promise();
     };
-    
+
     fetchData(dbpApiTgtList[0], vodKeyword[0], tgtDbpArr[0], tgtVodArr[0], 1).then(function(){
         fetchData(dbpApiTgtList[1], vodKeyword[1], tgtDbpArr[1], tgtVodArr[1] ,2)
       }).then(function(){
         ended();
       });
-    
+
     return dfd.promise();
   },
-  
+
   fetchDbpedia: function(tgtId) {
     var self = Fiver;
     var dfd = $.Deferred();
@@ -410,21 +406,21 @@
       });
     return dfd.promise();
   },
-  
+
   fetchNhkVod: function(filterName, searchList) {
     var self = Fiver;
     var dfd = $.Deferred();
     var tgt = $('#spot-temple-vod-api');
     var query = tgt.serialize()
     var replaceKey = 'REPLACEKEYWORD';
-    
+
     var retContains = function(key, str) {
       return 'CONTAINS(STR(?' + key + '),"' + str + '")';
     };
     var retFilterStr = function(key, str) {
       return 'Filter(STR(?' + key + '),"' + str + '").'
     };
-    
+
     var filterWord = [];
     if (searchList) {
       for (var i = 0; i < searchList.length; i++) {
@@ -433,7 +429,7 @@
       filterWord = filterWord.join(' || ');
     }
     query = query.replace(replaceKey, filterWord);
-    
+
     self.fetchAjax({
         url: tgt.attr('action'),
         data: query
@@ -446,10 +442,10 @@
       });
     return dfd.promise();
   },
-  
+
   showListMapDisplay: function() {
     this.switchDisplayDom(this.displayClass.listMap);
-    
+
     // リストの１番目の情報をセットしてマップ画面へ
     var set = this.setListMap(0);
     if (set) {$('#list-map-desc').show();}
@@ -472,7 +468,7 @@
     this.sendShowMapLog();
     return ret;
   },
-  
+
   //=========================
   // for GoogleMap
   //=========================
@@ -488,11 +484,11 @@
     this.initializeMap('spot');
     this.renderDirectionMap();
   },
-  
+
   renderDirectionMap: function() {
     var self = this;
     var dfd = $.Deferred();
-    
+
     // ルート検索の初期化
     this.directionsDisplay = new google.maps.DirectionsRenderer({
        "map": this.map,
@@ -503,7 +499,7 @@
     var start = new google.maps.LatLng(self.settingData.start.geo.lat, self.settingData.start.geo.lng);
     var dest = new google.maps.LatLng(self.settingData.dest.geo.lat, self.settingData.dest.geo.lng);
     var waypoint = new google.maps.LatLng(spot.lat, spot.long);
-    
+
     this.searchRouteFromGoogmeDirection(
       start,
       dest,
@@ -519,14 +515,14 @@
     });
     return dfd.promise();
   },
-  
+
   initializeMap: function(type) {
     var start = this.settingData.start;
     var end   = this.settingData.dest;
     var spot  = this.retSelectedSpotData();
     var address =  spot.address;
     var target = '';
-    
+
     this.deleteAllMarker();
     this.map = null;
     this.directionsDisplay = null;
@@ -539,7 +535,7 @@
         target = this.targetMapId.spot;
         break;
     }
-    
+
     // スタートの緯度経度をセンターに設定する
     var latlng = this.listForDefaultSpot[0].latlng.split(',');
     if (start.geo.lat && start.geo.lng) {
@@ -548,7 +544,7 @@
     this.googleMapOptions.center = new google.maps.LatLng(latlng[0], latlng[1]);
     this.map = new google.maps.Map($(target).get(0), this.googleMapOptions);
   },
-  
+
   //引数の配列から中間地点データを作成し返却
   makeWaypointData: function(waypoints) {
     var points = [];
@@ -560,7 +556,7 @@
     }
     return points;
   },
-  
+
   setMapMarkerFromSpot: function() {
     var spot = this.retSelectedSpotData();
     var latlng = new google.maps.LatLng(spot.lat, spot.long);
@@ -570,7 +566,7 @@
     var latlng = null;
     var start = this.settingData.start;
     var dest = this.settingData.dest;
-    
+
     // 開始、目的値が同じ緯度経度の場合は、開始位置に加算
     if (start.lat == dest.lat &&
         start.lng == dest.lng) {
@@ -580,7 +576,7 @@
       latlng = new google.maps.LatLng(start.geo.lat, start.geo.lng);
     }
     this.addMarker(latlng, start.location , 'start');
-    
+
     latlng = new google.maps.LatLng(dest.geo.lat, dest.geo.lng);
     this.addMarker(latlng, dest.location , 'dest');
   },
@@ -588,11 +584,11 @@
     var items = this.retLodItems();
     var spot = this.retSelectedSpotData();
     var latlng = null;
-    
+
     for (var i = 0; i < items.length; i++) {
       if (items[i] && items[i].lat && items[i].long) {
         latlng = new google.maps.LatLng(items[i].lat, items[i].long);
-        
+
         if (spot.lat == items[i].lat && spot.long == items[i].long) {
           this.addMarker(latlng, items[i].name, 'target');
         } else {
@@ -600,20 +596,20 @@
         }
       }
     }
-    
+
     this.setMapMarkerFromStartAndDest();
   },
   addLatlngForMeter: function(lat, lng, m) {
     // 緯度経度において、0.0001で約１0m
     var meter = 0.0001;
     var addMeter = m ? meter * m : meter;
-    
+
     return {
       lat: Number(lat) + addMeter,
       lng: Number(lng) + addMeter
     };
   },
-  
+
   addMarker: function(latlng, name, type) {
     var self = this;
     var iconSizeDef = [32, 32];
@@ -621,11 +617,11 @@
     var iconPosition   = new google.maps.Point(0, 0);
     var iconSize       = new google.maps.Size(iconSizeDef[0], iconSizeDef[1]);
     var icon = null;
-    
+
     var markerImage = function(image) {
       return new google.maps.MarkerImage(image,  iconSize, iconPosition, iconOffset);
     }
-    
+
     switch (type){
       case 'start':
         icon = markerImage(this.googleMapIcon.start);
@@ -641,21 +637,21 @@
         icon = markerImage(this.googleMapIcon.point);
         break;
     }
-    
+
     var marker = new google.maps.Marker({
       map: this.map,
       position: latlng,
       icon: icon,
       title: name
     });
-    
+
     // add event handler
     google.maps.event.addListener(marker, 'click', function() {
       var html = "<b>" + name + "</b> <br/>" ;
-      self.infoWindow.setContent(html); 
-      self.infoWindow.open(this.map,marker);   
+      self.infoWindow.setContent(html);
+      self.infoWindow.open(this.map,marker);  
     });
-    
+
     // add marker
     this.markers.push(marker);
   },
@@ -671,21 +667,21 @@
     }
     this.markers = [];
   },
-  
+
   // ルート検索
   searchRouteFromGoogmeDirection: function(start, dest, waypoint, mode) {
     var self = this;
     var dfd = $.Deferred();
-   
+
     //経由地をもとにGoogleAPIで問い合わせて、MAPへ描画
-    
+
     var request = {
       origin:      start,
       destination: dest
     };
-    
+
     request = $.extend({}, request, self.googleDirectionOption);
-    
+
     switch(mode) {
       case 'walk':
         request.travelMode = google.maps.DirectionsTravelMode.WALKING;
@@ -697,7 +693,7 @@
         request.travelMode = google.maps.DirectionsTravelMode.DRIVING;
         break;
     }
-    
+
     // 選択中のSpotを経由地に設定
     if (waypoint) {
       request.waypoints = this.makeWaypointData([waypoint]);
@@ -714,18 +710,18 @@
       });
     return dfd.promise();
   },
-  
+
   //========================================================
   // event
   //========================================================
   bindAction: function() {
     var self = this;
-    
+
     // clicked for searchButton
     $('.m-ui-button--search').on('click', function() {
       $('#m-list-sort').val('');
       self.setSettingData(self.makeSearchSettingData());
-      
+
       // 検索ログ送信
       self.sendLog(self.logEvent.search, {
         start: self.settingData.start.location,
@@ -733,17 +729,20 @@
         duration: self.settingData.dest.time,
         plan: self.settingData.plan,
       });
-      
+
       self.loader(true);
-      
+
       self.fetchSearchLOD()
       .done(function(data) {
         var format = self.formatLodData(data);
         if (format.total_num) {
+          //add20161218 検索件数を表示する
+          $('#spot-search-count').text(format.total_num);
+
           self.setSearchLodReult(format);
           // フォーマットデータを元にソートする
           self.setSortedLodData();
-          
+
           // ルート検索
           self.addDurationAndDistanceFromLodData();
         } else {
@@ -757,7 +756,7 @@
         self.error();
       });
     });
-    
+
 
     // clicked for backButton
     $(this.displayClass.list + ' .__link-back').on('click', function() {
@@ -772,7 +771,7 @@
     $('#m-button--spot').on('click', function() {
       self.showSpotDisplay();
     });
-    
+
     // clicked for mapButton
     $(this.displayClass.spot + ' .__link-map').on('click', function() {
       self.showSpotMapDisplay();
@@ -780,7 +779,7 @@
     $(this.displayClass.list + ' .__link-map').on('click', function() {
       self.showListMapDisplay();
     });
-    
+
     // clicked list map arrow
     $('#list-map-desc__prev').on('click', function() {
       self.setListMap($(this).data('list-map-prev'));
@@ -798,11 +797,11 @@
     swipeObj.on("swiperight", function(event) {
       self.setListMap($('#list-map-desc__next').data('list-map-next'));
     });
-    
+
     // change sort
     $('#m-list-sort').change(function() {
       var sort = $(this).val();
-      
+
       self.setSortedLodData(sort);
       $('.spot-list-more').hide();
       self.loader(true);
@@ -810,7 +809,7 @@
       $(self.displayClass.list).find('.content-body__scroll').scrollTop(0);
       self.addDurationAndDistanceFromLodData();
     });
-    
+
     // clicked Add to List
     $('.m-button--favorite').on('click', function() {
       var textarea = $(this).parents('div._layout3').find('textarea');
@@ -818,7 +817,7 @@
       if (textarea.attr('id').search('dest') > -1) {
         type = 'dest';
       }
-      
+
       if (textarea.val() == '') {
         // 出発地又は目的地の住所を入力してください
         alert('Please enter the address of the place of departure or destination');
@@ -826,12 +825,12 @@
       }
       self.addToList(type, textarea.val());
     });
-    
+
     // click current location(latlng) link
     $('.link-current-latlng').on('click', function(){
       var type = '';
       type = ($(this).attr('id').search('start') > -1) ? 'start' : 'dest';
-      
+
       switch(type) {
         case 'start':
           self.removeCookieFromStart();
@@ -840,23 +839,23 @@
           self.removeCookieFromDest();
           break;
       }
-      
+
       location.href = self.getgeoUrl + '?type=' + type;
     });
-    
+
     // click for list map description
     $('.__spot-desc__item').on('click', function(){
       self.showSpotDisplay();
     });
-    
-    
+
+
     // view in map app for modal
     var mapModal = window.mapModal = new Modal('.__fiver-map-modal');
     $('.m-button--map-app').on('click', function(){
       var links = self.retLinkOfMapAppBttonLinks();
-      
+
       mapModal.show();
-      
+
       // start to waypoint
       mapModal.$content.find('a').eq(0).attr({
         'href': links[0],
@@ -873,7 +872,7 @@
     // click spot web site
     $('#spot-web a').on('click', function(){
       var spotData = self.retSelectedSpotData();
-      
+
       self.sendLog(self.logEvent.weblink, {
         spot: spotData.place,
         keyword: self.settingData.plan,
@@ -882,27 +881,27 @@
         VOD: self.retDataItemIdList($('#spot-related-video-list a')),
       });
     });
-    
+
     $('.map-app-modal-link').on('click', function(){
       var event = self.logEvent.mapAppStart;
-      
+
       if ($(this).attr('id').search('dest') > -1) {
         event = self.logEvent.mapAppDest;
       }
-      
+
       self.sendMapAppLog(event);
     });
-    
+
     $('.spot-list-more').on('click', function(){
       self.loader(true);
-      
+
       if (self.routeCountup < self.sortedData.length) {
         self.retRoutCalDataSortedData();
       } else {
         $('.spot-list-more').hide();
       }
     });
-    
+
 /*
     // unload action
     $(window).on('beforeunload', function() {
@@ -920,12 +919,12 @@
   offListItemAction: function() {
     $('.m-list__item', this.listItemDom).off('click');
   },
-  
+
   // click for spot recipe and video
   onSpotItemAction: function() {
     var self = this;
     var tgtDom = $('#spot-recipe-list a, #spot-related-video-list a');
-    
+
     tgtDom.off('click');
     tgtDom.on('click', function(){
       var id = $(this).data('spot-item-id');
@@ -934,14 +933,14 @@
         keyword: spotData.nhkWorldKey
       };
       var event = self.logEvent.vod;
-      
+
       if ($(this).attr('class').search('recipe') > -1) {
         event = self.logEvent.recipe;
         param.recipe = id;
       } else {
         param.VOD = id;
       }
-      
+
       self.sendLog(event, param);
     });
   },
@@ -960,21 +959,21 @@
       this.error();
     }
   },
-  
+
   sendShowMapLog: function() {
     var spotData = this.retSelectedSpotData();
     this.sendLog(this.logEvent.map, {
       spot: spotData.place
     });
   },
-  
+
   sendMapAppLog: function(event) {
     var spotData = this.retSelectedSpotData();
     this.sendLog(event, {
       spot: spotData.place
     });
   },
-  
+
   error: function(str) {
     this.loader(false);
   },
@@ -988,7 +987,7 @@
     .done(onComplate)
     .fail(onError);
   },
-  
+
   // LODからプランに関する情報を取得
   fetchSearchLOD: function() {
     var dfd = $.Deferred();
@@ -1019,7 +1018,7 @@
       imgType:    'photo',
       searchType: 'image',
     };
-    
+
     self.fetchAjax({url: self.googleCustomsearchApi + $.param(query)},
       function(data) {
         if (data.items && data.items.length) {
@@ -1038,15 +1037,15 @@
     var dfd = $.Deferred();
     var filterWord = self.retContainesQueryForRecipe(keyword);
     var query = $('#spot-recipe-api').serialize();
-    
+
     // keywordがなければリクエストしない
     if (!keyword) {
       return dfd.reject();
     }
-    
+
     filterWord = 'FILTER(' + filterWord + ').';
     query = query.replace('REPLACEFILTER', filterWord);
-    
+
     self.fetchAjax({
         url: $('#spot-recipe-api').attr('action'),
         data: query
@@ -1059,7 +1058,7 @@
       });
     return dfd.promise();
   },
-  
+
   fetchRelatedVideoFromKeyword: function(vod, vod_sc) {
     var self = Fiver;
     var dfd = $.Deferred();
@@ -1070,14 +1069,14 @@
     var setFilter = function(key, str) {
       return 'Filter(STR(?' + key + ')="' + str + '").'
     };
-    
+
     var filterWord = '';
     if (vod) {
       filterWord = setFilter('id', vod);
     }
     query = query.replace('ReplaceFilterId', filterWord);
-    
-    
+
+
     filterWord = '';
     if (vod_sc) {
       vod_sc = vod_sc.replace('<', '');
@@ -1087,11 +1086,11 @@
     }
     query = query.replace('ReplaceFilterScene', filterWord);
     console.log("fetchRelatedVideoFromKeyword",vod,vod_sc);
-    
+
     if (!vod && !vod_sc) {
       return dfd.reject();
     }
-    
+
     self.fetchAjax({
         url: $('#spot-video-api').attr('action'),
         data: query
@@ -1114,7 +1113,7 @@
 //      location_type: 'ROOFTOP',
 //      result_type: 'street_address'
     };
-    
+
     if (type == 'address') {
       query.address = param;
     } else {
@@ -1142,7 +1141,7 @@
       });
     return dfd.promise();
   },
-  
+
   // LODデータに時間を追加
   addDurationAndDistanceFromLodData: function() {
     // LODデータをそのまま表示
@@ -1150,12 +1149,12 @@
       this.routeSearchEnd();
       return;
     }
-    
+
     this.routeCountup = 0;
     this.lodDataItemsTemp = [];
     this.retRoutCalDataSortedData();
   },
-  
+
   retRouteCalLineAndTime: function(spotData) {
     //開始点と目的地の緯度経度
     var lat_s  = this.settingData.start.geo.lat;
@@ -1165,14 +1164,14 @@
     var defaultSpeed = [5 ,40];//徒歩, 車 の速度km/h
     var lat  = spotData.lat;
     var long = spotData.long;
-    
+
     if (!lat || !long) {
       return null;
     }
-    
+
     //日本における１Km辺りの経度
     var km = 0.010966404715491394;
-    
+
     // 開始地点と終了地点が同じ場合は、10mプラスして計算
     if (lat_s == lat_d &&
         long_s == long_d) {
@@ -1180,7 +1179,7 @@
         lat_d = addLatlng.lat;
         long_d = addLatlng.lng;
     }
-    
+
     //直線の傾けと切片の計算
     var m = (long_d - long_s) / (lat_d - lat_s);
     var n = ((long_s * lat_d) - (lat_s * long_d)) / (lat_d - lat_s);
@@ -1192,37 +1191,37 @@
 
     //観光地と、開始位置と目的地を結んだ線との直線距離計算
     var distance = distance_s + distance_d;
-    
+
     switch (this.settingData.mode) {
-      case 'walk': 
+      case 'walk':
         speed = defaultSpeed[0];
         break;
-      case 'drive': 
+      case 'drive':
         speed = defaultSpeed[1];
         break;
     }
-    
+
     distance = (distance * 1000).toFixed(0);
     var duration = distance / (speed * 1000);
     if (spotData.stay_time) {
       var stayTime = (spotData.stay_time / 60).toFixed(1);
       duration = Number(duration) + Number(stayTime);
     }
-    
+
 //    console.log(spotData);
 //    console.log("３箇所の直線距離=", distance, " 時間：", duration);
 //    console.log("開始-観光地の直線距離=",distance_s);
 //    console.log("観光地-目的地の直線距離=",distance_d);
-    
+
     var ret = {
       distance: distance / 1000,
       duration: duration
     };
-    
+
     return ret;
   },
-  
-  
+
+
   retRoutCalDataSortedData: function(curPage) {
     var self = this;
     var sortedData = this.sortedData;
@@ -1232,7 +1231,7 @@
       end = len;
     }
     this.lodDataItemsTemp = [];
-    
+
     var next = function() {
       if (self.routeCountup >= end) {
         searchEnd();
@@ -1243,7 +1242,7 @@
          }, 300);
       }
     };
-    
+
     var searchEnd = function() {
       self.routeSearchEnd();
     };
@@ -1257,21 +1256,21 @@
         var dest       = new google.maps.LatLng(self.settingData.dest.geo.lat, self.settingData.dest.geo.lng);
         var waypoint   = new google.maps.LatLng(curLodItem.lat, curLodItem.long);
         var mode       = self.settingData.mode;
-        
+
         self.searchRouteFromGoogmeDirection(start, dest, waypoint, mode)
           .done(function(response, status) {
             //console.log("result", self.routeCountup, response);
-            
+
             if (response.routes[0]) {
               var dur = Number(response.routes[0].legs[0].duration.value) + Number(response.routes[0].legs[1].duration.value);
               dur += Number(sortedData[Fiver.routeCountup].stay_time) * 60;
               dur = (Number(dur)  / 3600).toFixed(1);
               var dis = Number(response.routes[0].legs[0].distance.value) + Number(response.routes[0].legs[1].distance.value);
               dis = (Number(dis) / 1000).toFixed(1);
-              
+
               curLodItem.duration = dur;
               curLodItem.distance = dis;
-              
+
               // 制限時間を比較して範囲外なら除外
               if (parseFloat(dur) <= parseFloat(self.settingData.dest.time)) {
                 self.lodDataItemsTemp.push(curLodItem);
@@ -1287,10 +1286,10 @@
           });
       }
     };
-    
+
     recursivRouteSearch();
   },
-  
+
   //========================================================
   // data
   //========================================================
@@ -1300,10 +1299,10 @@
     var dest = 'select[name="destSpotList"] ';
     var startLatlng = $(start + 'option:selected').data('pulldown-latlng').split(',');
     var destLatlng = $(dest + 'option:selected').data('pulldown-latlng').split(',');
-    
+
     obj.plan = $('select[name="plan"]').val();
     obj.mode = $('input[name="routeMode"]:checked').val();
-    
+
     obj.start.location = $(start).val();
     obj.start.geo.lat = startLatlng[0];
     obj.start.geo.lng = startLatlng[1];
@@ -1349,7 +1348,7 @@
     }
     return null;
   },
-  
+
   retCookieNameForAddress: function(type) {
     return this.retCookieNameForLocation(type, 'address');
   },
@@ -1358,7 +1357,7 @@
   },
   retCookieNameForLocation: function(type, ctg) {
     var key = '';
-    
+
     switch(type) {
       case 'start':
         key = 's';
@@ -1367,7 +1366,7 @@
         key = 'd';
         break;
     }
-    
+
     switch(ctg) {
       case 'address':
         key += '_address';
@@ -1376,7 +1375,7 @@
         key += '_latlng';
         break;
     }
-    
+
     return key;
   },
   retLatlngFromCookie: function(type) {
@@ -1410,21 +1409,21 @@
     var sortItems = [];
     this.curPage = 1;
     this.routeCountup = 0;
-    
+
     $.extend(sortItems, this.retLodItemsOrigne());
-    
+
     if (sort) {
       // 昇順ソート
       sortItems.sort(function(a, b) {
         a[sort] = parseFloat(a[sort]);
         b[sort] = parseFloat(b[sort]);
-        
+
         if( a[sort] < b[sort]) return -1;
         if( a[sort] > b[sort] ) return 1;
         return 0;
       });
     }
-    
+
     this.sortedData = $.extend([], sortItems);
     this.lodData.items = $.extend([], sortItems);
   },
@@ -1440,7 +1439,7 @@
       }
     }
   },
-  
+
   removeCookieFromLocation: function() {
     this.removeCookieFromStart();
     this.removeCookieFromDest();
@@ -1453,7 +1452,7 @@
     $.removeCookie('d_latlng');
     $.removeCookie('d_address');
   },
-  
+
   addToList: function(type, address) {
     var self = this;
     var setPulldownAndStrage = function(address, latlng) {
@@ -1462,14 +1461,14 @@
         self.setPulldownForSpots();
       }
     };
-    
+
     // 新しい住所を入力
     if (this.retAddressFromCookie(type) != address) {
       // addressからLatlng取得
       this.fetchGoogleGeoodeApi(address, 'address')
         .done(function(data) {
           var latlng = data.lat + ',' + data.lng;
-          
+
           // cookie、テキストエリア、LocalStorageの上書き
           $.cookie(self.retCookieNameForAddress(type), data.address);
           $.cookie(self.retCookieNameForLatlng(type), latlng);
@@ -1485,7 +1484,7 @@
       setPulldownAndStrage(address, self.retLatlngFromCookie(type));
     }
   },
-  
+
   // LocalStorageに保存。重複は保存しません。
   addSpotLists: function(address, latlng) {
     var limit = 10;
@@ -1496,13 +1495,13 @@
         // 古いアドレスを削除し、登録. 上限はN件です
         alert('registered to delete the old address. The limit is ' + limit);
       }
-      
+
       for (var i = 0; i < lists.length; i++) {
         if (lists[i].latlng == latlng || lists[i].address == address) {
           return true;
         }
       }
-      
+
       lists.unshift({address: address, latlng: latlng});
       this.listForSpotData = lists;
       this.localStorage.set(this.spotStorageKey, JSON.stringify(lists));
@@ -1520,21 +1519,21 @@
   removeStorageForSpots: function() {
     this.localStorage.remove(this.spotStorageKey);
   },
-  
+
   isSpotInRange: function(lat, long) {
 if (!lat || !long) {
   return false;
 }
-  
+
     //開始点と目的地の緯度経度
     var lat_s  = this.settingData.start.geo.lat;
     var long_s = this.settingData.start.geo.lng;
     var lat_d  = this.settingData.dest.geo.lat;
     var long_d = this.settingData.dest.geo.lng;
-    
+
     //日本における１Km辺りの経度
     var km = 0.010966404715491394;
-    
+
     // 開始地点と終了地点が同じ場合は、10mプラスして計算
     if (lat_s == lat_d &&
         long_s == long_d) {
@@ -1542,7 +1541,7 @@ if (!lat || !long) {
         lat_d = addLatlng.lat;
         long_d = addLatlng.lng;
     }
-    
+
     //直線の傾けと切片の計算
     var m = (long_d - long_s) / (lat_d - lat_s);
     var n = ((long_s * lat_d) - (lat_s * long_d)) / (lat_d - lat_s);
@@ -1565,7 +1564,7 @@ if (!lat || !long) {
     }
     return false;
   },
-  
+
   formatLodData: function(data) {
     var names = [];
     var len = 0;
@@ -1592,7 +1591,7 @@ if (!lat || !long) {
       'vod_sc'       : 'vod_sc',
       'web'          : 'web',
     };
-    
+
     var removeQuotation = function(str) {
       if (str) {
         str = str.replace(/^"/, '');
@@ -1610,7 +1609,7 @@ if (!lat || !long) {
       for (var i = 0; i < names.length; i++) {
         key = convertNameToKey[names[i]];
         str = removeQuotation(value[i]);
-        
+
         if (key == 'stay_time') {
           item[key] = str || 0;
         } else if (key == 'web'){
@@ -1622,26 +1621,26 @@ if (!lat || !long) {
         } else {
           if(!str){str = '';}
           if(str == 0){str = '';}
-          
+
           item[key] = str;
         }
       }
-      
+
       return item;
     };
-    
+
     if (data.names && data.values) {
       names = data.names;
       formatData.total_num = len;
     }
-   
+
     for (var i = 0; i < data.values.length; i++) {
       convert = convertItemData(data.values[i]);
        // 出発、目的地の距離で制限をかける
       if (this.isSpotInRange(convert.lat, convert.long)) {
         // データ件数が多い場合にリミット
         if(cnt >= this.drawItemNum) {break;}
-        
+
         // 簡易的に距離、時間を計算
         var calData = this.retRouteCalLineAndTime(convert);
         if (calData.duration > Number(this.settingData.dest.time)) {
@@ -1654,18 +1653,18 @@ if (!lat || !long) {
         cnt++;
       }
     }
-    
+
     formatData.total_num = formatData.items.length;
     return formatData;
   },
-  
+
   setHtmlSpotRecipeFromKeyword: function() {
     var self = Fiver;
     var dfd = $.Deferred();
     var spotData = self.retSelectedSpotData();
     self.spotRecipeData = null;
     console.log("setHtmlSpotRecipeFromKeyword",spotData);
-    
+
     //keyword が無ければ、categoryの文字列を使用
     var keyword = spotData.nhkWorldKey;
     console.log("recipe keyword",keyword);
@@ -1687,7 +1686,7 @@ if (!lat || !long) {
       });
     return dfd.promise();
   },
-  
+
   formatRecipeData: function(data) {
     var recipeLimit = 5;
     var nutritionLimit = 10;
@@ -1699,7 +1698,7 @@ if (!lat || !long) {
     var recipeData = [];
     var showed_url_list = [];
     showed_url_list.push(items[0].r_url.value);
-    
+
     var makeObj = function(recipe) {
       var getRecipeId = function(val) {
         var id = '';
@@ -1719,41 +1718,41 @@ if (!lat || !long) {
       }
       return ret;
     };
-    
+
     if (!data && oldRecipeId == '') return recipeData;
-    
+
     for (var i = 0; i < items.length; i++) {
       curRecipeId = items[i].Recipe.value;
-      
+
       // レシピデータ作成
       if (!recipeData[cnt]) {
         recipeData[cnt] = makeObj(items[i]);
       }
-      
+
       // recipeIdが変わるまで食材を追加
       if (curRecipeId != oldRecipeId) {
         // すでに表示しているレシピなら次へ
         if(showed_url_list.indexOf(items[i].r_url.value) >= 0) {
           continue;
         }
-        
+
         oldRecipeId = curRecipeId;
         showed_url_list.push(items[i].r_url.value);
-        
+
         // 食材がリミット以上あれば「…」を追加
         if (nutritionCnt > recipeData[cnt].r_IngredientName.length) {
           recipeData[cnt].r_IngredientName.push('…');
         }
-        
+
         nutritionCnt = 0;
         cnt++;
-        
+
         if (cnt > recipeLimit) {
           break;
         } else {
           continue;
         }
-        
+
       } else {
         // 食材の個数はリミットあり
         if (nutritionCnt < nutritionLimit) {
@@ -1762,10 +1761,10 @@ if (!lat || !long) {
         nutritionCnt++;
       }
     }
-    
+
     return recipeData;
   },
-  
+
   retDataItemIdList: function(target) {
     var list = [];
     target.each(function(){
@@ -1773,7 +1772,7 @@ if (!lat || !long) {
     });
     return list.join(',');
   },
-  
+
   retContainesQueryForRecipe: function(keyword) {
     if (keyword) {
       var filters = [
@@ -1788,7 +1787,7 @@ if (!lat || !long) {
     }
     return '';
   },
-  
+
   //========================================================
   // HTML
   //========================================================
@@ -1802,7 +1801,7 @@ if (!lat || !long) {
     }
     return html;
   },
-  
+
   // list
   setHtmlListDom: function() {
     $(this.displayClass.list + ' .m-list').append(
@@ -1812,7 +1811,7 @@ if (!lat || !long) {
         this.listNum
       ));
   },
-  
+
   makeListItemtHtml: function(itemData) {
     var html = '<a class="m-list__item" href="#" data-af-item-id="[[ID]]" data-af-item-locatioin="[[LOCATION]]"><div class="__item-head"><h2>[[NAME]]</h2><span class="__category">[[CATEGORY]]</span></div><div class="__item-body"><div class="__thumb"><div class="__thumb-image" style="background-image:url([[LOGO]])"></div></div><div class="__summary"><div><h3>Duration</h3><div>[[DURATION]] hours</div></div><div><h3>Distance</h3><div>[[DISTANCE]] km</div></div>[[STAY_HTML]][[PRICE_HTML]]</div></div></a>';
     html = html.replace('[[CATEGORY]]', itemData.category);
@@ -1821,7 +1820,7 @@ if (!lat || !long) {
     html = html.replace('[[LOGO]]',     itemData.imageURL);
     html = html.replace('[[DURATION]]', itemData.duration);
     html = html.replace('[[DISTANCE]]', itemData.distance);
-    
+
     // staytime
     var stayHtml = '<div><h3>Stay Time</h3><div>[[STAY]] mins</div></div>';
     if (itemData.stay_time) {
@@ -1830,7 +1829,7 @@ if (!lat || !long) {
       stayHtml = '';
     }
     html = html.replace('[[STAY_HTML]]',  stayHtml);
-    
+
     // price
     var priceHtml = '<div><h3>Average price</h3><div style="width:10em;">[[PRICE]]</div></div>';
     if (itemData.average_price) {
@@ -1843,7 +1842,7 @@ if (!lat || !long) {
     html = html.replace('[[LOCATION]]', itemData.address);
     return html;
   },
-  
+
   // spot description
   setHtmlSpotDescription: function() {
     var spotData = Fiver.retSelectedSpotData();
@@ -1874,7 +1873,7 @@ if (!lat || !long) {
     }
 
   },
-  
+
   // spot reset description
   resetHtmlSpotDom: function() {
     $('#spot-image').html('');
@@ -1895,15 +1894,15 @@ if (!lat || !long) {
     var self = Fiver;
     var dfd = $.Deferred();
     this.spotImageData = null;
-    
+
     var addDQ = function(str) {
       return '"' + str + '"';
     };
-    
+
     if (!keyword) {
       return dfd.reject().promise();
     }
-    
+
     self.fetchGoogleImgFromKeyword(keyword)
       .done(function(data) {
         self.spotImageData = data;
@@ -1915,7 +1914,7 @@ if (!lat || !long) {
       });
     return dfd.promise();
   },
-  
+
   setHtmlSpotImageDom: function() {
     $('#spot_image-search').html(
       this.makeItemDomStr(
@@ -1930,7 +1929,7 @@ if (!lat || !long) {
     html = html.replace('[[IMG]]',  itemData.image.thumbnailLink);
     return html;
   },
-  
+
   // spot Recipe
   setHtmlSpotRecipeDom: function() {
     $('#spot-recipe-list').html(
@@ -1939,7 +1938,7 @@ if (!lat || !long) {
         this.makeSpotRecipeItemHtml,
         5
       )).show();
-      
+
   },
   makeSpotRecipeItemHtml: function(itemData) {
     var html = '<a class="__recipe__item" href="[[LINK]]" target="_blank" data-spot-item-id="[[RECIPEID]]"><div><div class="__thumb"><div class="__thumb-image" style="background-image:url([[IMG]])"></div></div><div class="__recipe__item-notes"><span class="__difficultly">[[DIF]]</span><span class="__calorie">[[KCAL]]kcal</span></div></div><div><h3>[[TITLE]]</h3><p>[[TEXT]]</p></div></a>';
@@ -1960,7 +1959,7 @@ if (!lat || !long) {
     var spotData = self.retSelectedSpotData();
     this.spotVideoData = null;
     console.log("setHtmlSpotVideoFromKeyword",spotData);
-    
+
     self.fetchRelatedVideoFromKeyword(spotData.vod, spotData.vod_sc)
       .done(function(data) {
         self.spotVideoData = data;
@@ -1983,7 +1982,7 @@ if (!lat || !long) {
   },
   makeSpotVideoItemHtml: function(itemData) {
     var html = '<a class="__video__item" href="[[LINK]]" target="_blank" data-spot-item-id="[[VIDEOID]]"><div class="__video__item__head"><div class="__thumb"><div class="__thumb-image"  style="background-image:url([[IMG]])"></div></div><h3>[[TEXT]]</h3></div><div class="__video__item__body"><div><p>[[DESCRIPTINO]]</p></div></div></a>';
-    
+
     html = html.replace('[[LINK]]', itemData.vod_url.value);
     html = html.replace('[[VIDEOID]]', itemData.clip.value.split('jp/')[1]);
     html = html.replace('[[DESCRIPTINO]]', itemData.description.value);
@@ -2006,14 +2005,14 @@ if (!lat || !long) {
         tgt.html(value + str);
       }
     };
-    
+
     $('#list-map-title').html(spotData.name);
     $('#list-map-spot').html(spotData.category);
     $('#list-map-duration').html(Number(spotData.duration).toFixed(1) + ' hours');
     $('#list-map-distance').html(Number(spotData.distance).toFixed(1) + ' km');
     setView($('#list-map-time'), spotData.stay_time, ' mins');
     setView($('#list-map-average-price'), spotData.average_price);
-    
+
     // データが１つなら矢印は非表示
     if (itemLength == 1) {
       nextDom.hide();
@@ -2041,25 +2040,25 @@ if (!lat || !long) {
     var param_start = {
       saddr: this.settingData.start.geo.lat + ',' + this.settingData.start.geo.lng,
       daddr: waypoint,
-      
+
       // google Map options
       f: 'd',  //Driving
     };
-    
+
     var param_dest = {
       saddr: waypoint,
       daddr: this.settingData.dest.geo.lat + ',' + this.settingData.dest.geo.lng,
-      
+
       // google Map options
       f: 'd',  //Driving
     };
     return [this.googleMapLink + $.param(param_start), this.googleMapLink + $.param(param_dest)];
   },
-  
+
   setPulldownForSpots: function() {
     var baseHtml = '<option value="[[ADDRESS]]" data-pulldown-latlng="[[LATLNG]]">[[ADDRESS]]</option>';
     var html = '';
-    
+
     var makeHtml = function(spotList) {
       var ret = '';
       if (spotList) {
@@ -2071,12 +2070,12 @@ if (!lat || !long) {
       }
       return ret;
     };
-    
+
     html = makeHtml(this.getStorageForSpots());
     html += makeHtml(this.listForDefaultSpot);
     $('.spot-list').html(html);
   },
-  
+
   loader: function(bool) {
     if (bool) {
       window.loading.show();
@@ -2084,7 +2083,7 @@ if (!lat || !long) {
       window.loading.hide();
     }
   },
-  
+
   //========================================================
   // common
   //========================================================
@@ -2125,11 +2124,10 @@ if (!lat || !long) {
       tab: 'AfterFiver',
       event: event,
     };
-    
+
     if (param) {
       sendParam = $.extend(sendParam, param);
     }
     sbc(sendParam);
   }
 };
-

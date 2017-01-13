@@ -35,16 +35,16 @@
 			return (o[key])?o[key]:'';
 		}
 	};
-	
+
 	if( 'geolocation' in navigator == false) {
 		alert('your browser can not use geolocation API !');
 		return;
 	}
   navigator.geolocation.getCurrentPosition(function(position) {
-        var tourl = 'http://afterfiver.lodosaka.jp/cookie.html';
+        var tourl = 'http://afterfiver.lodosaka.jp/osaka/cookie.html';
       tourl +='?lat='+position.coords.latitude;
       tourl +='&lon='+position.coords.longitude;
-      
+
       var q = queryF.getObj({});
       if (q.type) {
         tourl += '&type=' + q.type;
@@ -54,7 +54,7 @@
     // ブラウザがGeolocation APIに対応しているが、使えない場合とかエラーが起きたときの処理
     alert(error);
     alert('Position information can not be retrieved. \nIn OS settings, please set the position information in the "ON"');
-    location.href = 'http://afterfiver.lodosaka.jp/';
+    location.href = 'http://afterfiver.lodosaka.jp/osaka/';
   }, {
       timeout: 10000, // 取得タイムアウトまでの時間（ミリ秒）
       maximumAge: 10000,  // 位置情報の有効期限（ミリ秒）
@@ -65,4 +65,3 @@
 </body>
 <h2>Please wait a moment. The position information has been acquired.</h2>
 </html>
-

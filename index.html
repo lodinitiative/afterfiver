@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>AfterFiver</title>
+	<link rel="stylesheet" href="assets/css/index.css" />
+
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="manifest" href="manifest.json">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="AfterFiver">
+	<meta name="theme-color" content="#cb8922">
+	<link rel="icon" sizes="192x192" href="/assets/img/icon/icon-app_192x192.png">
+	<meta name="apple-mobile-web-app-capable" content="no">
+	<meta name="apple-mobile-web-app-title" content="AfterFiver">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#cb8922">
+	<link rel="apple-touch-icon-precomposed" href="/assets/img/icon/icon-app_144x144.png">
+	<meta name="msapplication-TileColor" content="#cb8922">
+	<meta name="msapplication-navbutton-color" content="#cb8922">
+	<meta name="msapplication-TileImage" content="/assets/img/icon/icon-app_144x144.png">
+	<link rel="shortcut icon" href="/assets/img/icon/icon-app_144x144.png">
+	<link rel="canonical" href="http://afterfiver.lodosaka.jp/">
+
+</head>
+<body>
+	<div class="container">
+
+		<div class="page-head">
+
+			<div class="m-menu">
+				<a class="m-menu__item _active" data-menu-target="content-fiver">
+					<img src="assets/img/menu/icon-fiver.svg" alt="">
+					<span>AfterFiver</span>
+				</a>
+				<a class="m-menu__item" data-menu-target="content-capture">
+					<img src="assets/img/menu/icon-capture.svg" alt="">
+					<span>Japanese<br>Capture</span>
+				</a>
+				<a class="m-menu__item" data-menu-target="content-tv">
+					<img src="assets/img/menu/icon-watch.svg" alt="">
+					<span>Watch TV</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="page-body">
+
+			<div class="m-menu-targets">
+
+				<!-- After Fiver START -->
+				<div class="m-menu-target _active" data-menu-name="content-fiver">
+
+					<!-- content start -->
+					<div class="content content-fiver--start">
+
+						<div class="content-head"></div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<!-- content-body__inner -->
+								<div class="content-body__inner">
+
+									<div class="l-section">
+
+										<h2>Choose Plan</h2>
+										<select name="plan">
+											<option value="restaurant">Restaurant</option>
+											<option value="sightseeing">Sightseeing</option>
+											<option value="karaoke">Karaoke</option>
+										</select>
+
+									</div>
+
+									<div class="l-section">
+
+										<h2>Start Location</h2>
+
+										<div class="l-section-part _layout1">
+											<a  id="start-get-current-location" class="m-button--get-location link-current-latlng">
+												Get Current Location
+											</a>
+										</div>
+
+										<div id="current-location-start__div" class="l-section-part _layout3 current-locatoin__div">
+											<div><textarea id="current-location-start__textarea" class="js-location-textarea" cols="" rows="2"></textarea></div>
+											<div>
+												<a class="m-button m-button--favorite" href="#">
+													Add to List
+												</a>
+											</div>
+										</div>
+
+										<div class="l-section-part">
+											<div class="_layout2">
+												<h3>Spot</h3>
+												<select class="spot-list" name="startSpotList">
+													<option value="Kobe Station">Kobe Station</option>
+													<option value="Sannomiya Station">Sannomiya Station</option>
+													<option value="Motomachi Station">Motomachi Station</option>
+													<option value="Osaka Station">Osaka Station</option>
+													<option value="Mt. Rokko">Mt. Rokko</option>
+													<option value="Port of kobe">Port of kobe</option>
+												</select>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="l-section">
+
+										<h2>Destination</h2>
+
+										<div class="l-section-part _layout1">
+											<a id="dest-get-current-location" class="m-button--get-location link-current-latlng">
+												Get Current Location
+											</a>
+										</div>
+
+										<div id="current-location-dest__div" class="l-section-part _layout3 current-locatoin__div">
+											<div><textarea id="current-location-dest__textarea" class="js-location-textarea" cols="" rows="2"></textarea></div>
+											<div>
+												<a class="m-button m-button--favorite" href="#">
+													Add to List
+												</a>
+											</div>
+										</div>
+
+										<div class="l-section-part">
+											<div class="_layout2">
+												<h3>Spot</h3>
+												<select class="spot-list" name="destSpotList">
+													<option value="Kobe Station">Kobe Station</option>
+													<option value="Sannomiya Station">Sannomiya Station</option>
+													<option value="Motomachi Station">Motomachi Station</option>
+													<option value="Osaka Station">Osaka Station</option>
+													<option value="Mt. Rokko">Mt. Rokko</option>
+													<option value="Port of kobe">Port of kobe</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="l-section-part">
+											<div class="_layout2">
+												<h3>Projected journey time</h3>
+												<select name="destArriveBy">
+													<option value="30">30 min</option>
+													<option value="60">60 min</option>
+													<option value="90">90 min</option>
+													<option value="120" selected>120 min</option>
+													<option value="150">150 min</option>
+													<option value="180">180 min</option>
+													<option value="210">210 min</option>
+													<option value="240">240 min</option>
+													<option value="270">270 min</option>
+													<option value="300">300 min</option>
+												</select>
+											</div>
+										</div>
+
+									</div>
+
+
+									<div class="l-section">
+
+										<h2>Transportation</h2>
+
+										<div class="_layout4">
+											<div class="_layout4__inner">
+
+												<div class="_layout-radio-group">
+
+													<label>
+														<input type="radio" name="routeMode" value="drive" checked="checked">
+														<span class="_layout-radio-group__icon"></span>
+														<span>Driving</span>
+													</label>
+
+													<label>
+														<input type="radio" name="routeMode" value="walk">
+														<span class="_layout-radio-group__icon"></span>
+														<span>Walking</span>
+													</label>
+
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+
+
+									<div class="l-section">
+										<div class="l-section-part">
+											<a class="m-ui-button m-ui-button--search">
+												Search
+											</a>
+										</div>
+									</div>
+		<form method="get" action="http://lod.hozo.jp/repositories/AfterFiverKOBE#query/d/" target="result" id="spot-lod-api" style="display:none" >
+			<textarea name="query" cols="100" rows="30"  hidden >
+prefix ishk: <http://data.lodosaka.jp/iswc2016hack/property#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix cc: <http://creativecommons.org/ns#>
+prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+prefix schema: <http://schema.org/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+select  (STR(?place_name) as ?name) (STR(?place_address) as ?address) (STR(?place_comment) as ?comment) (STR(?place_img_url) as ?img_url)  (STR(?place_fee) as ?fee)   (STR(?place_openingHours) as ?openingHours) (STR(?place_keyword) as ?keyword) (STR(?place_stay_time) as ?stay_time) (STR(?lat) as ?place_lat) (STR(?long) as ?place_long) (STR(?place_category) as ?category) ?place (STR(?place_name_ja) as ?name_ja) ?vod ?vod_sc ?web
+FROM <http://data.lodosaka.jp/iswc2016hack/PLANWORD>
+where
+{
+?place rdfs:label ?place_name.
+?place ishk:jaLabel ?place_name_ja;
+OPTIONAL{?place ishk:nhkVOD ?vod}.
+OPTIONAL{?place ishk:nhkVODscene ?vod_sc}.
+OPTIONAL{?place schema:adress ?place_address}.
+OPTIONAL{?place rdfs:comment ?place_comment}.
+OPTIONAL{?place ishk:imageURL ?place_img_url}.
+OPTIONAL{?place ishk:fee ?place_fee}.
+OPTIONAL{?place ishk:openingHours ?place_openingHours}.
+OPTIONAL{?place ishk:stay ?place_stay_time}.
+OPTIONAL{?place geo:lat ?lat}.
+OPTIONAL{?place geo:long ?long}.
+OPTIONAL{?place ishk:nhkVODKeys ?place_keyword}.
+OPTIONAL{?place ishk:category ?place_category}.
+OPTIONAL{?place foaf:homepage ?web}
+}
+</textarea>
+										</form>
+									<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+									</div>
+
+								</div>
+								<!-- /content-body__inner -->
+							</div>
+						</div>
+					</div>
+					<!-- /content start -->
+
+					<!-- content list -->
+					<div class="content content-fiver--list">
+
+						<div class="content-head">
+							<div class="m-sub-navigation">
+								<div>
+									<a class="__link-back" href="#"></a>
+								</div>
+								<div>
+									<select id="m-list-sort" name="sort">
+										<option value="">Sort</option>
+										<option value="duration">Duration</option>
+										<option value="distance">Distance</option>
+									</select>
+								</div>
+								<div>
+									<a class="__link-map" href="#">Map</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<div class="content-body__inner">
+
+									<div class="m-list">
+										<!-- list content -->
+									</div>
+
+									<div class="spot-list-more">
+										<a class="m-ui-button m-ui-button--more">
+											Show more
+										</a>
+									</div>
+
+									<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /content list -->
+
+					<!-- content spot -->
+					<div class="content content-fiver--spot">
+
+						<div class="content-head">
+							<div class="m-sub-navigation">
+								<div><a class="__link-back" href="#"></a></div>
+								<div>Spot Information</div>
+								<div><a class="__link-map" href="#">Map</a></div>
+							</div>
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<div class="content-body__inner">
+
+									<div class="__slider">
+										<div id="spot-image" class="__slide-content">
+											<div class="__thumb"><div class="__thumb-image" style="background-image:url(assets/img/dummy/slide-itemsss.jpg);"></div></div>
+										</div>
+										<div class="__slide-indicator"></div>
+									</div>
+
+									<div class="__spot-description">
+										<div class="__item-head">
+
+											<div>
+												<span id="spot-plan" class="__item-category"></span>
+												<div id="spot-title" class="__item-title"></div>
+											</div>
+										</div>
+										<div class="__item-body">
+											<dl>
+												<dt>Duration</dt>
+												<dd id="spot-duration">hours</dd>
+											</dl>
+											<dl>
+												<dt>Distance</dt>
+												<dd id="spot-distance">km</dd>
+											</dl>
+											<dl>
+												<dt>Stay Time</dt>
+												<dd id="spot-time">mins</dd>
+											</dl>
+											<dl>
+												<dt>Average price</dt>
+												<dd id="spot-average-price">JPY</dd>
+											</dl>
+										</div>
+									</div>
+
+									<div id="spot-comment" class="l-section">
+										<h2>spot comment</h2>
+										<p id="spot-comment-desc">
+										</p>
+									</div>
+
+									<div id="spot-web" class="l-section __web-link">
+											<h2>web site</h2>
+											<div><a href="#" target="_blank"></a></div>
+									</div>
+
+									<div id="spot-search-image" class="l-section">
+										<h2>Image Search from Google</h2>
+										<div id="spot_image-search" class="__image-search">
+											<a href="#"><img src="" alt="" /></a>
+										</div>
+									</div>
+
+									<!-- For interview  -->
+										<form method="get" action="http://dbpedia.org/sparql/" target="result" id="spot-templ-api" style="display:none" >
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+ PREFIX dbr: <http://dbpedia.org/property/>
+SELECT distinct ?abstract
+WHERE {
+
+  ?s rdfs:label "Temple"@en.
+?s dbo:abstract ?abstract .
+FILTER (lang(?abstract) = "en") .
+
+} LIMIT 1
+</textarea>
+										</form>
+
+										<form method="get" action="http://dbpedia.org/sparql/" target="result" id="spot-buddhism-api" style="display:none" >
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+ PREFIX dbr: <http://dbpedia.org/property/>
+SELECT distinct ?abstract
+WHERE {
+
+  ?s rdfs:label "Buddhism"@en.
+?s dbo:abstract ?abstract .
+FILTER (lang(?abstract) = "en") .
+
+} LIMIT 1
+</textarea>
+										</form>
+
+									<div id="spot-interview-content" style="display:none;">
+										<div id="spot-temple" class="l-section">
+											<h2>information about Temple</h2>
+											<div id="spot-temple-dbp" class="__dbpedia">
+											</div>
+											<h2>Related Video from NHK</h2>
+											<div id="spot-temple-list" class="__video">
+											</div>
+										</div>
+										<div id="spot-buddis" class="l-section">
+											<h2>Information about Buddism</h2>
+											<div id="spot-buddis-dbp" class="__dbpedia">
+											</div>
+											<h2>Related Video from NHK</h2>
+											<div id="spot-buddis-list" class="__video">
+											</div>
+										</div>
+									</div>
+									<!-- For interview  End -->
+
+									<div id="spot-recipe" class="l-section">
+										<h2>Recipe from NHK</h2>
+
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="spot-recipe-api" style="display:none" >
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?Recipe ?r_title ?r_nutrition_value ?r_difficulty ?r_url ?r_thumbnail ?r_IngredientName
+where
+{
+{
+select distinct ?Recipe ?title ?difficulty ?url ?thumbnail ?IngredientName
+where
+{
+?Recipe rdf:type nw-recipe:Recipe.
+?Recipe nw-recipe:title ?title.
+?Recipe nw-recipe:EnglishURL ?url.
+?Recipe nw-recipe:thumbnail ?thumbnail.
+?Recipe nw-recipe:difficulty ?difficulty.
+FILTER(lang(?title) = "en" ).
+FILTER(lang(?difficulty) = "en" ).
+?Recipe nw-recipe:hasIngredientRelation ?RI.
+?RI nw-recipe:hasIngredients ?Ingredient.
+?Ingredient nw-recipe:name ?IngredientName.
+FILTER(lang(?IngredientName) = "en" ).
+REPLACEFILTER
+}
+}
+?Recipe nw-recipe:title ?r_title.
+?Recipe nw-recipe:EnglishURL ?r_url.
+?Recipe nw-recipe:thumbnail ?r_thumbnail.
+?Recipe nw-recipe:difficulty ?r_difficulty.
+?Recipe nw-recipe:nutrition_value ?r_nutrition_value.
+FILTER(lang(?r_title) = "en" ).
+FILTER(lang(?r_difficulty) = "en" ).
+?Recipe nw-recipe:hasIngredientRelation ?r_RI.
+?r_RI nw-recipe:hasIngredients ?r_Ingredient.
+?r_Ingredient nw-recipe:name ?r_IngredientName.
+FILTER(lang(?r_IngredientName) = "en" ).
+FILTER(STR(?r_IngredientName) != "NULL").
+}
+</textarea>
+										</form>
+
+										<div id="spot-recipe-list" class="__recipe">
+											<!-- recipe content -->
+										</div>
+									</div>
+
+									<div id="spot-related" class="l-section">
+										<h2>Related Video from NHK</h2>
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="spot-video-api" style="display:none" >
+										<input type="text" name="key" value="******" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?clip ?subtitle ?description ?img ?vod_url
+where
+{
+?clip rdf:type nw:VOD.
+?clip nw:subtitle ?subtitle.
+?clip nw:description ?description.
+?clip nw:thumbnail ?thumbnail.
+?clip nw:publishDate ?publishDate.
+BIND(year(?publishDate) as ?publishYear)
+BIND(month(?publishDate) as ?publishMonth)
+BIND(now() as ?now)
+BIND(year(?now) as ?nowYear)
+BIND(month(?now) as ?nowMonth)
+FILTER( (?publishYear >= ?nowYear) || (?publishYear >= ?nowYear-1 && ?publishMonth >= ?nowMonth) ).
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img).
+?clip nw:id ?id.
+?clip nw:hasScene ?scene.
+ReplaceFilterScene
+?scene nw:tc ?tc
+BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id,"&stime=",STR(?tc)) as ?vod_url).
+ReplaceFilterId
+}
+</textarea>
+										</form>
+
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="spot-temple-vod-api" style="display:none">
+										<input type="text" name="key" value="******" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?clip ?subtitle ?description ?img ?vod_url
+where
+{
+?clip rdf:type nw:VOD.
+?clip nw:subtitle ?subtitle.
+?clip nw:description ?description.
+?clip nw:thumbnail ?thumbnail.
+?clip nw:publishDate ?publishDate.
+Filter( REPLACEKEYWORD ).
+BIND(year(?publishDate) as ?publishYear)
+BIND(month(?publishDate) as ?publishMonth)
+BIND(now() as ?now)
+BIND(year(?now) as ?nowYear)
+BIND(month(?now) as ?nowMonth)
+FILTER( (?publishYear >= ?nowYear) || (?publishYear >= ?nowYear-1 && ?publishMonth >= ?nowMonth) )
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img)
+?clip nw:id ?id.
+BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
+}
+</textarea>
+										</form>
+
+										<div id="spot-related-video-list" class="__video">
+											<!-- vide content -->
+										</div>
+
+									</div>
+
+									<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- content spot -->
+
+					<!-- content list map -->
+					<div class="content content-fiver--list-map">
+
+						<div class="content-head">
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<div class="content-body__inner">
+
+									<div>
+										<div class="__page-navigation">
+											<a href="#" class="m-button--map-app" target="_blank">View in map app</a>
+											<a href="#" id="m-button--list" class="m-button--list">List</a>
+										</div>
+
+										<div id="__map-list" class="__map">
+											<div class="__map-dummy"></div>
+											<div class="__map__inner">
+											</div>
+										</div>
+
+										<div id="list-map-desc" class="__spot-desc">
+											<div>
+												<a id="list-map-desc__prev" data-list-map-prev="" href="#" class="__spot-desc__prev"><img src="assets/img/icon-prev.svg" alt="" /></a>
+											</div>
+											<div>
+												<div id="list-map-desc-item" class="__spot-desc__item">
+													<div class="__item-head">
+														<div id="list-map-title" class="__item-title"></div>
+														<span id="list-map-spot" class="__item-category">Noodle</span>
+													</div>
+													<div class="__item-body">
+														<dl>
+															<dt>Duration</dt>
+															<dd id="list-map-duration"></dd>
+														</dl>
+														<dl>
+															<dt>Distance</dt>
+															<dd id="list-map-distance"></dd>
+														</dl>
+														<dl>
+															<dt>Stay Time</dt>
+															<dd id="list-map-time"></dd>
+														</dl>
+														<dl>
+															<dt>Average price</dt>
+															<dd id="list-map-average-price"></dd>
+														</dl>
+													</div>
+
+												</div>
+											</div>
+											<div>
+												<a id="list-map-desc__next" data-list-map-next="" href="#" class="__spot-desc__next"><img src="assets/img/icon-next.svg" alt="" /></a>
+											</div>
+										</div>
+									</div>
+
+									<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- /content list map -->
+					<!-- content spot map -->
+					<div class="content content-fiver--spot-map">
+
+						<div class="content-head">
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<div class="content-body__inner">
+
+									<div>
+										<div class="__page-navigation">
+											<a href="#" class="m-button--map-app" target="_blank">View in map app</a>
+											<a href="#" id="m-button--spot" class="m-button--list">spot</a>
+										</div>
+
+										<div id="__map-spot" class="__map">
+											<div class="__map-dummy"></div>
+											<div class="__map__inner">
+											</div>
+										</div>
+
+									</div>
+
+									<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- content spot map -->
+
+				</div>
+				<!-- After Fiver END -->
+
+				<!-- Japanese Capture START -->
+				<div class="m-menu-target" data-menu-name="content-capture">
+					<!-- content start -->
+					<div class="content content-capture--start">
+
+						<div class="content-head">
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<!-- content-body__inner -->
+								<div class="content-body__inner">
+
+									<div>
+										<div class="__capture">
+
+											<div class="__capture__init _active">
+												<label class="m-ui-file">
+													<input type="file" accept="image/*">
+												</label>
+												<div class="__capture__init__message">
+													Capture any Japanese, you can search the information from Web and LOD contents.
+												</div>
+											</div>
+
+											<div class="__capture__loaded">
+												<div class="__capture__preview">
+													capture image here.
+												</div>
+												<label class="m-ui-file">
+													<input type="file" accept="image/*">
+												</label>
+											</div>
+
+										</div>
+									</div>
+
+									<div>
+									<!-- Begin Yahoo! JAPAN Web Services Attribution Snippet -->
+									<a href="http://developer.yahoo.co.jp/about">
+									<img src="http://i.yimg.jp/images/yjdn/yjdn_attbtn1_125_17.gif" title="Webサービス by Yahoo! JAPAN" alt="Web Services by Yahoo! JAPAN" width="125" height="17" border="0" style=""></a>
+									<!-- End Yahoo! JAPAN Web Services Attribution Snippet -->
+									</div>
+
+									<div>
+										<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+										</div>
+									</div>
+
+								</div>
+								<!-- /content-body__inner -->
+							</div>
+						</div>
+					</div>
+					<!-- /content start -->
+					<!-- content start2 -->
+					<div class="content content-capture--start" style="display:none">
+
+						<div class="content-head">
+							<div class="__ruby">OKONOMIYAKI</div>
+							<div class="__keywords">
+								<div class="__keywords__input">
+									<input type="text" value="お好み焼き">
+									<a href="#" class="__keywords__clear">
+										<img src="assets/img/icon-clear.svg" alt="" />
+									</a>
+								</div>
+								<div>
+									<a href="#" class="__keywords__submit">
+										<img src="assets/img/icon-search.svg" alt="" />
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<!-- content-body__inner -->
+								<div class="content-body__inner">
+
+									<div>
+										<div class="__capture">
+
+											<div class="__capture__init">
+												<label class="m-ui-file">
+													<input type="file" accept="image/*">
+												</label>
+												<div class="__capture__init__message">
+													Capture any Japanese, you can search the information from Web and LOD contents.
+												</div>
+											</div>
+
+											<div class="__capture__loaded _active">
+												<div class="__capture__preview">
+													capture image here.
+												</div>
+												<label class="m-ui-file">
+													<input type="file" accept="image/*">
+												</label>
+											</div>
+
+										</div>
+									</div>
+
+									<div>
+									<!-- Begin Yahoo! JAPAN Web Services Attribution Snippet -->
+									<a href="http://developer.yahoo.co.jp/about">
+									<img src="http://i.yimg.jp/images/yjdn/yjdn_attbtn1_125_17.gif" title="Webサービス by Yahoo! JAPAN" alt="Web Services by Yahoo! JAPAN" width="125" height="17" border="0" style=""></a>
+									<!-- End Yahoo! JAPAN Web Services Attribution Snippet -->
+									</div>
+
+									<div>
+										<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+										</div>
+									</div>
+
+								</div>
+								<!-- /content-body__inner -->
+							</div>
+						</div>
+					</div>
+					<!-- /content start2 -->
+
+					<!-- content detail -->
+					<div class="content content-capture--detail" style="display:none">
+
+						<div class="content-head">
+							<div class="m-sub-navigation">
+								<div>
+									<a class="__link-back" href="#"></a>
+								</div>
+								<div>
+									Search Result
+								</div>
+								<div></div>
+							</div>
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<!-- content-body__inner -->
+								<div class="content-body__inner">
+
+									<div class="l-section __result-summary">
+										<div>
+											<h2>Japanese Searched Words</h2>
+											<div class="__words">
+												<span>
+													<span class="__words__ruby">OKONOMIYAKI</span>
+													<span class="__words__text">お好み焼き</span>
+												</span>
+											</div>
+										</div>
+
+										<div>
+											<h2>Translated Words</h2>
+											<div>
+												Pancake
+											</div>
+										</div>
+									</div>
+
+									<div class="l-section l-section--gray">
+										<h2>Image Search from Google</h2>
+										<div class="__image-search">
+											<a href="#"><img src="assets/img/dummy/image-search.jpg" alt="" /></a>
+											<a href="#"><img src="assets/img/dummy/image-search.jpg" alt="" /></a>
+											<a href="#"><img src="assets/img/dummy/image-search.jpg" alt="" /></a>
+											<a href="#"><img src="assets/img/dummy/image-search.jpg" alt="" /></a>
+											<a href="#"><img src="assets/img/dummy/image-search.jpg" alt="" /></a>
+											<a href="#"><img src="assets/img/dummy/image-search.jpg" alt="" /></a>
+										</div>
+
+										<div class="__dbpedia">
+											Okonomiyaki (お好み焼き o-konomi-yaki?) (About this sound listen (help·info)) is a Japanese savoury pancake containing a variety of ingredients. The name is derived from the word okonomi, meaning "how you like" or "what you like", and yaki meaning "grill"
+											(cf. yakitori and yakisoba). Okonomiyaki is mainly associated with the Kansai or Hiroshima areas of Japan, but is widely available throughout the country. Toppings and batters tend to vary according to region. Tokyo okonomiyaki is usually smaller
+											than a Hiroshima or Kansai okonomiyaki.
+										</div>
+									</div>
+
+									<!-- 特定文字列（「親子丼」「おやこどん」「おやこ丼」） -->
+									<div id="capture-special-content" style="display:none;">
+										<!-- recipe1  -->
+										<div class="l-section  l-section--nb">
+											<h2>Oyako Don Recipe from NHK</h2>
+											<div id="capture-recipe-content1" class="__recipe">
+												<!-- recipe item  -->
+											</div>
+										</div>
+
+										<!-- recipe 2  -->
+										<div class="l-section  l-section--nb">
+											<h2>Other "Don" Recipe from NHK</h2>
+											<div id="capture-recipe-content2" class="__recipe">
+												<!-- recipe item  -->
+											</div>
+										</div>
+
+										<!-- recipe3  -->
+										<div class="l-section  l-section--nb">
+											<h2>Recipe using Chicken and egg</h2>
+											<div id="capture-recipe-content3" class="__recipe">
+												<!-- recipe item  -->
+											</div>
+										</div>
+									</div>
+									<!-- 特定文字列  -->
+
+									<div class="l-section  l-section--nb">
+										<h2>Recipe from NHK</h2>
+
+										<div id="capture-recipe" class="__recipe">
+
+											<a class="__recipe__item">
+												<div><img src="assets/img/dummy/recipe.jpg" alt="" /></div>
+												<div>
+													<h3>Niku Udon/450kcal</h3>
+													<h4>Pork, Udon</h4>
+													<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
+												</div>
+											</a>
+
+											<a class="__recipe__item">
+												<div><img src="assets/img/dummy/recipe.jpg" alt="" /></div>
+												<div>
+													<h3>Niku Udon/450kcal</h3>
+													<h4>Pork, Udon</h4>
+													<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
+												</div>
+											</a>
+
+											<a class="__recipe__item">
+												<div><img src="assets/img/dummy/recipe.jpg" alt="" /></div>
+												<div>
+													<h3>Niku Udon/450kcal</h3>
+													<h4>Pork, Udon</h4>
+													<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
+												</div>
+											</a>
+
+
+										</div>
+									</div>
+
+									<div class="l-section">
+										<h2>Related Video from NHK</h2>
+
+										<div class="__video">
+											<a class="__video__item">
+												<div><img src="assets/img/dummy/video.jpg" alt="" /></div>
+												<div>
+													<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
+												</div>
+											</a>
+										</div>
+
+										<div class="__video">
+											<a class="__video__item">
+												<div><img src="assets/img/dummy/video.jpg" alt="" /></div>
+												<div>
+													<p>Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </p>
+												</div>
+											</a>
+										</div>
+
+									</div>
+
+										<div>
+									<!-- Begin Yahoo! JAPAN Web Services Attribution Snippet -->
+									<a href="http://developer.yahoo.co.jp/about">
+									<img src="http://i.yimg.jp/images/yjdn/yjdn_attbtn1_125_17.gif" title="Webサービス by Yahoo! JAPAN" alt="Web Services by Yahoo! JAPAN" width="125" height="17" border="0" style=""></a>
+									<!-- End Yahoo! JAPAN Web Services Attribution Snippet -->
+									</div>
+
+									<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+									</div>
+
+								</div>
+								<!-- /content-body__inner -->
+							</div>
+						</div>
+					</div>
+					<!-- /content datail -->
+
+				</div>
+				<!-- Japanese Capture END -->
+
+
+
+				<!-- Watch TV START -->
+				<div class="m-menu-target" data-menu-name="content-tv">
+					<!-- content start -->
+					<div class="content content-tv--start">
+
+						<div class="content-head">
+						</div>
+
+						<div class="content-body">
+							<div class="content-body__scroll">
+								<!-- content-body__inner -->
+								<div class="content-body__inner">
+
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-onair-api" style="display:none" >
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select ?E ?title ?description ?onair ?onairEnd ?img ?link_url
+where
+{
+?E rdf:type nw:EPG.
+?E nw:title ?title.
+?E nw:link ?link.
+?E nw:description ?description.
+?E nw:onair ?onair.
+?E nw:onairEnd ?onairEnd.
+?E nw:thumbnail ?thumbnail.
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img)
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?link)) as ?link_url)
+FILTER(xsd:dateTime(concat(str(?onairEnd),"+09:00")) > now()).
+}
+order by ?onairEnd
+LIMIT 1
+</textarea>
+										</form>
+
+									<h1>
+										<span>Onair!</span>
+										<div id="onair-title"></div>
+									</h1>
+
+									<div class="__screenshot">
+										<div class="__thumb">
+											<iframe id="onair-player"  class="nw_player_fix_iframe_video" frameborder="0" src="" style="width:100%; height:100%;"></iframe>
+										</div>
+										<p id="onair-description" class="__screenshot__caption"></p>
+									</div>
+
+
+									<div class="__next-video">
+
+										<div class="__next-video__head">
+
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-next-api" style="display:none">
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select ?E ?title ?onair ?onairEnd ?description ?img ?link_url
+where
+{
+?E rdf:type nw:EPG.
+?E nw:title ?title.
+?E nw:link ?link.
+?E nw:description ?description.
+?E nw:onair ?onair.
+?E nw:onairEnd ?onairEnd.
+?E nw:thumbnail ?thumbnail.
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img) .
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?link)) as ?link_url).
+FILTER(xsd:dateTime(concat(str(?onair),"+09:00")) > now()).
+FILTER(xsd:dateTime(concat(str(?onairEnd),"+09:00")) > now()).
+}
+order by ?onair
+Limit 1
+</textarea>
+										</form>
+
+											<h3>
+												<span>Next</span>
+												<div id="next-title"></div>
+											</h3>
+										</div>
+
+										<div class="__next-video__body">
+											<div>
+												<a id="next-link" href="#" target="_blank">
+													<div class="__thumb">
+														<div id="next-image" class="__thumb-image" style="background-image: url()"></div>
+													</div>
+												</a>
+												<div id="next-time" class="__next-video__time"></div>
+											</div>
+											<div id="next-description"></div>
+										</div>
+
+									</div>
+
+
+									<div class="__twitter">
+										<div class="__twitter__head"></div>
+										<div class="__twitter__body">
+											<a class="twitter-timeline" href="https://twitter.com/NHKWORLD_News" data-lang="en" data-chrome="noheader nofooter" data-tweet-limit="5">Tweets by NHKWORLD_News</a>
+											<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+										</div>
+									</div>
+
+									<div id="tv-video" class="l-section">
+
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-vod-api" style="display:none">
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?clip ?subtitle ?description ?img ?vod_url
+where
+{
+?clip rdf:type nw:VOD.
+?clip nw:subtitle ?subtitle.
+?clip nw:description ?description.
+?clip nw:thumbnail ?thumbnail.
+?clip nw:publishDate ?publishDate.
+Filter( REPLACEKEYWORD ).
+BIND(year(?publishDate) as ?publishYear)
+BIND(month(?publishDate) as ?publishMonth)
+BIND(now() as ?now)
+BIND(year(?now) as ?nowYear)
+BIND(month(?now) as ?nowMonth)
+FILTER( (?publishYear >= ?nowYear) || (?publishYear >= ?nowYear-1 && ?publishMonth >= ?nowMonth) )
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img)
+?clip nw:id ?id.
+BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
+}
+</textarea>
+										</form>
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-nature-api" style="display:none">
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?clip ?subtitle ?description ?img ?vod_url
+where
+{
+?clip rdf:type nw:VOD.
+?clip nw:subtitle ?subtitle.
+?clip nw:description ?description.
+?clip nw:thumbnail ?thumbnail.
+?clip nw:publishDate ?publishDate.
+BIND(year(?publishDate) as ?publishYear)
+BIND(month(?publishDate) as ?publishMonth)
+BIND(now() as ?now)
+BIND(year(?now) as ?nowYear)
+BIND(month(?now) as ?nowMonth)
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img).
+?clip nw:id ?id.
+BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
+OPTIONAL{?clip nw:hasScene ?scene}.
+FILTER( (?publishYear >= ?nowYear) || (?publishYear >= ?nowYear-1 && ?publishMonth >= ?nowMonth) ).
+FILTER(STR(?clip)="http://nw-lod.nhk.or.jp/V2007261" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007254"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007259"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007251" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007209" ||  STR(?clip)="http://nw-lod.nhk.or.jp/V2007249"  ||  STR(?clip)="http://nw-lod.nhk.or.jp/V2007242" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007241"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007239"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007227"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007252"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007267" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007246"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007257").
+}
+</textarea>
+										</form>
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-tradition-api" style="display:none">
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?clip ?subtitle ?description ?img ?vod_url
+where
+{
+?clip rdf:type nw:VOD.
+?clip nw:subtitle ?subtitle.
+?clip nw:description ?description.
+?clip nw:thumbnail ?thumbnail.
+?clip nw:publishDate ?publishDate.
+BIND(year(?publishDate) as ?publishYear)
+BIND(month(?publishDate) as ?publishMonth)
+BIND(now() as ?now)
+BIND(year(?now) as ?nowYear)
+BIND(month(?now) as ?nowMonth)
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img).
+?clip nw:id ?id.
+BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
+OPTIONAL{?clip nw:hasScene ?scene}.
+FILTER( (?publishYear >= ?nowYear) || (?publishYear >= ?nowYear-1 && ?publishMonth >= ?nowMonth) ).
+FILTER(STR(?clip)="http://nw-lod.nhk.or.jp/V2007229" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007248"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007264"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007263" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007163" ||  STR(?clip)="http://nw-lod.nhk.or.jp/V2007260"  ||  STR(?clip)="http://nw-lod.nhk.or.jp/V2007253" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007265"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007245"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007250"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007262").
+}
+</textarea>
+										</form>
+										<form method="get" action="http://nw-lod.nhk.jp/sparql" target="result" id="tv-culture-api" style="display:none">
+										<input type="text" name="key" value="r9cWdKYhaSThf9XPPnMB2ehJJPD0wLvA" size="50" hidden/><br/>
+										<textarea name="query" cols="100" rows="30"  hidden >
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX nw: <http://nw-lod.nhk.or.jp/>
+PREFIX nw-recipe: <http://nw-lod.nhk.or.jp/recipe#>
+select distinct ?clip ?subtitle ?description ?img ?vod_url
+where
+{
+?clip rdf:type nw:VOD.
+?clip nw:subtitle ?subtitle.
+?clip nw:description ?description.
+?clip nw:thumbnail ?thumbnail.
+?clip nw:publishDate ?publishDate.
+BIND(year(?publishDate) as ?publishYear)
+BIND(month(?publishDate) as ?publishMonth)
+BIND(now() as ?now)
+BIND(year(?now) as ?nowYear)
+BIND(month(?now) as ?nowMonth)
+BIND(CONCAT("http://www3.nhk.or.jp",STR(?thumbnail)) as ?img).
+?clip nw:id ?id.
+BIND(CONCAT("http://www3.nhk.or.jp/nhkworld/app/vod/?vid=",?id) as ?vod_url)
+OPTIONAL{?clip nw:hasScene ?scene}.
+FILTER( (?publishYear >= ?nowYear) || (?publishYear >= ?nowYear-1 && ?publishMonth >= ?nowMonth) ).
+FILTER(STR(?clip)="http://nw-lod.nhk.or.jp/V2007258" || STR(?clip)="http://nw-lod.nhk.or.jp/V205324"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007255"  || STR(?clip)="http://nw-lod.nhk.or.jp/V2007243" || STR(?clip)="http://nw-lod.nhk.or.jp/V2007256").
+}
+</textarea>
+										</form>
+
+
+										<h2>Related Video from NHK</h2>
+
+										<div id="tv-video-item" class="__video">
+											<!-- video items -->
+										</div>
+
+									</div>
+								</div>
+
+								<div class="copyright">
+										Developed through the
+										<a href="/about.html">ISWC2016@KOBE</a> cooperation Hackathon
+								</div>
+
+							</div>
+							<!-- /content-body__inner -->
+						</div>
+					</div>
+
+					<!-- /content start -->
+
+				</div>
+				<!-- Watch TV END -->
+			</div>
+
+		</div>
+
+		<div class="page-foot">
+		</div>
+	</div>
+
+	<!-- m-loading -->
+	<div class="m-loading">
+		<div class="m-loading__loader">
+			<div class="m-loading__loader-inner"></div>
+		</div>
+	</div>
+	<!-- /m-loading -->
+
+	<div class="m-modal-contents">
+
+		<div class="__fiver-map-modal">
+			<div class="__fiver-map-modal__inner">
+				<div class="__fiver-map-modal__buttons">
+					<a href="#" class="map-app-modal-link" href="" target="_blank">from start location to waypoint</a>
+					<a href="#" class="map-app-modal-link" href="" target="_blank">from waypoint to destination</a>
+				</div>
+				<div class="__fiver-map-modal__close">
+					<a href="javascript:">Close</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyB5czCuRaFM7ZgV0-POcRKY9Z-aDolhNtQ"></script>
+	<script src="assets/js/libs/underscore.js"></script>
+	<script src="assets/js/libs/jquery.js"></script>
+	<script src="assets/js/libs/jquery.cookie.js"></script>
+	<script src="assets/js/libs/slick.js"></script>
+	<script src="assets/js/libs/snap.svg-min.js"></script>
+	<script src="assets/js/libs/snap.svg.easing.js"></script>
+	<script src="assets/js/libs/hammer.min.js"></script>
+	<script src="assets/js/libs/exif.js"></script>
+	<script src="assets/js/libs/log.js"></script>
+	<script src="assets/js/build/caputure.js"></script>
+	<script src="assets/js/build/fiver.js"></script>
+	<script src="assets/js/build/tv.js"></script>
+	<script src="assets/js/build/index.js"></script>
+
+</body>
+</html>

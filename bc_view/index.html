@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>bc viewer ver0.1</title>
+<style>
+textarea{width:100%;height:50%;overflow-x:scroll;}
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#ymd').html(function(){
+		var d=new Date();
+		var ht='';
+		while(true){
+			ht+='<option>'+DateIF.format('YYYYMMDD',d)+'</option>';
+			d=DateIF.addDate(d,{D:-1});
+			if(DateIF.format('YYYYMMDD',d)==='20161016'){
+				break;
+			}
+		}
+		return ht;
+	}).on('change',function(){
+		chklog(1);
+		$('#stoplog').attr('checked',function(){
+			return $(this).val()!=DateIF.format('YYYYMMDD',new Date());
+		});
+	});
+	$('.update').on('change',function(){
+		cookF.set('confttl',$('#ttl').val(),{expires:365});
+		//cookF.set('conffil',$('#s').val(),{expires:365});
+		cookF.set('confmax',$('#max').val(),{expires:365});
+		cookF.set('confbox',$('#box').val(),{expires:365});
+		$('#result').prop('size',$('#box').val());
+		chklog(1);
+	});
+	$('#result').on('click change',function(){
+		var d1 = $(this).val();
+		if(d1){
+			var d=d1.split('	');
+			//console.log(d,d.length);
+			if(d.length==6){
+				var ht='';
+				ht+='<h2>サーバアクセス時間</h2>';
+				ht+='<p>'+d[0]+'</p>';
+				ht+='<h2>UUID(個体識別子)</h2>';
+				ht+='<p><a href="#" onclick="filteruuid(this);return false;">'+d[1]+'</a></p>';
+				ht+='<h2>接続元</h2>';
+				ht+='<p>'+d[2]+'<br>'+d[3]+'</p>';
+				ht+='<h2>リクエストURL</h2>';
+				ht+='<p>'+d[4]+'</p>';
+				ht+='<h2>リクエストデータオブジェクト</h2>';
+				ht+='<pre>'+decodeJSON(d[4])+'</pre>';
+				ht+='<h2>UserAgent</h2>';
+				ht+='<p>'+d[5]+'</p>';
+				$('#detail').html(ht);
+			}
+		}
+	});
+	$('#ttl').val( cookF.get('confttl')||5 );
+	//$('#s').val( cookF.get('conffil')||"" );
+	$('#max').val( cookF.get('confmax')||10 );
+	$('#box').val( cookF.get('confbox')||10 );
+	window.chklog = function (force){
+		var q={max:10};
+		
+		// keywordをセット
+		var s=$('#s').val();
+		if(s!=''){
+			q.s=s;
+		}
+		
+		// 取得する最大行数をセット
+		var m=$('#max').val();
+		if(m!=''&&!isNaN(m)){
+			if(m>1000){
+				m=1000;
+			}
+			q.max=m;
+			$('#max').val(m);
+		}
+
+		var ymd=$('#ymd').val();
+		if(ymd!=''&&!isNaN(ymd)){
+			q.ymd=ymd;
+		}
+		
+		// 表示のTTLをセット
+		var t=$('#ttl').val();
+		if(t==='0' || (force!=1 && $('#stoplog').prop('checked')==true)){
+			return;
+		}
+		if(t!=''&&!isNaN(t)){
+		}
+		else{
+			t=5;
+		}
+		
+		$.ajax({
+			url:'chklog.php',
+			data:q,
+			dataType:'text',
+			success:function(dt){
+				convertSELECT(dt);
+				setTimeout(function(){
+					chklog(0);
+				},t*1000);
+			}
+		});
+	}
+	chklog(1);
+	$('#del_filter').on('click',function(){
+		$('#s').val('');
+		chklog(1);
+	});
+	$('#result').width($(document).width());
+	//$('#stoplog').attr('checked',true);
+});
+function filteruuid(el){
+	$('#s').val($(el).text());
+	chklog(1);
+}
+function decodeJSON(str){
+	str = str.replace(/^\/bc\/iswcapp\/|\/x\.(gif|js)$/gi,'',str);
+	str = decodeURIComponent(str);
+	var json = JSON.parse(str);
+	return JSON.stringify(json, null, "\t");
+}
+function convertSELECT(dt){
+	var d=dt.split(/\n/);
+	var ht='';
+	var cnt=0;
+	for(var i=0;i<d.length && d[i]!='';i++){
+		ht+='<option value="'+d[i]+'">'+d[i]+'</option>';
+		cnt++;
+	}
+	$('#result').html( ht );
+}
+var DateIF={yobi:'日 月 火 水 木 金 土'.split(' '),yobiE:'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' '),tukiE:'January February March April May June July August September October November December'.split(' '),parse:function(str){var ret=false;if(!str)return false;if(str.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/)){ret = new Date( parseInt(RegExp.$1,10), parseInt(RegExp.$2,10)-1, parseInt(RegExp.$3,10), parseInt(RegExp.$4,10), parseInt(RegExp.$5,10), parseInt(RegExp.$6,10) );}else if(str.match(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/)){ret = new Date( parseInt(RegExp.$1,10), parseInt(RegExp.$2,10)-1, parseInt(RegExp.$3,10), parseInt(RegExp.$4,10), parseInt(RegExp.$5,10) );}else if(str.match(/(\d{4})(\d{2})(\d{2})/)){ret = new Date( parseInt(RegExp.$1,10), parseInt(RegExp.$2,10)-1, parseInt(RegExp.$3,10) );}else if(str.match( /(\d{4})\D(\d{1,2})\D(\d{1,2})\D(\d{1,2})\D(\d{1,2})\D(\d{1,2})/ )){ret = new Date( parseInt(RegExp.$1,10), parseInt(RegExp.$2,10)-1, parseInt(RegExp.$3,10), parseInt(RegExp.$4,10), parseInt(RegExp.$5,10), parseInt(RegExp.$6,10) );}else if(str.match( /(\d{4})\D(\d{1,2})\D(\d{1,2})\D(\d{1,2})\D(\d{1,2})/ )){ret = new Date( parseInt(RegExp.$1,10), parseInt(RegExp.$2,10)-1, parseInt(RegExp.$3,10), parseInt(RegExp.$4,10), parseInt(RegExp.$5,10) );}else if(str.match( /(\d{4})\D(\d{1,2})\D(\d{1,2})/ )){ret = new Date( parseInt(RegExp.$1,10), parseInt(RegExp.$2,10)-1, parseInt(RegExp.$3,10) );}return ret;},format:function(fmt, d){var t={};t.Y = fmt.match(/Y+/);if(t.Y)fmt = fmt.replace( /Y+/g, d.getFullYear().toString().slice(4-t.Y[0].length) );t.M = fmt.match(/M+/);if(t.M)fmt = fmt.replace( /M+/g, this.zeroPad(d.getMonth()+1, t.M[0].length) );t.D = fmt.match(/D+/);if(t.D)fmt = fmt.replace( /D+/g, this.zeroPad(d.getDate(), t.D[0].length) );fmt = fmt.replace( /a+/g, this.yobi[d.getDay()] );var hh=d.getHours();var hf=((hh-12)>=0)?1:0;fmt = fmt.replace( /A+/g, Array('AM','PM')[hf] );fmt = fmt.replace( /G+/g, Array('午前','午後')[hf] );t.h = fmt.match(/h+/);if(t.h)fmt = fmt.replace( /h+/g, this.zeroPad(hh, t.h[0].length) );t.n = fmt.match(/n+/);if(t.n)fmt = fmt.replace( /n+/g, this.zeroPad( Array(hh,hh-12)[hf], t.n[0].length) );t.m = fmt.match(/m+/);if(t.m)fmt = fmt.replace( /m+/g, this.zeroPad(d.getMinutes(), t.m[0].length) );t.s = fmt.match(/s+/);if(t.s)fmt = fmt.replace( /s+/g, this.zeroPad(d.getSeconds(), t.s[0].length) );fmt = fmt.replace( /K+/g, this.tukiE[d.getMonth()] );fmt = fmt.replace( /k+/g, this.tukiE[d.getMonth()].substring(0,3) );fmt = fmt.replace( /X+/g, this.yobiE[d.getDay()] );fmt = fmt.replace( /x+/g, this.yobiE[d.getDay()].substring(0,3) );return fmt;},reformat:function(fmt,dstr){var dt=this.parse(dstr);if(dt){return this.format(fmt, dt);}else return false;},getFirstDay:function(d){return this.parse( this.format('YYYY/MM/01',d) );},zeroPad:function(s,l){s=s.toString();while(s.length<l){s='0'+s;}return s;},addDate:function(d, add){var ad={Y:0,M:0,D:0,h:0,m:0,s:0};for(var i in add){ad[i]=add[i];}return (new Date(d.getFullYear()+ad.Y, d.getMonth()+ad.M, d.getDate()+ad.D, d.getHours()+ad.h, d.getMinutes()+ad.m, d.getSeconds()+ad.s));},setDate:function(d, set){var se={Y:d.getFullYear(),M:d.getMonth(),D:d.getDate(),h:d.getHours(),m:d.getMinutes(),s:d.getSeconds()};for(var i in set){if(i=='M'){se[i]=set[i]+1;}else se[i]=set[i];}return new Date(se.Y, se.M, se.D, se.h, se.d, se.s);},timeDelete:function(d){return this.parse(this.format('YYYY/MM/DD',d));},diffDate:function(d1,d2){return (this.timeDelete(d1)-this.timeDelete(d2))/86400000;}};
+</script>
+</head>
+<body>
+<div id="content" style="100%">
+YYYYMMDD:<select id="ymd" type="text" name="ymd"></select><br>
+TTL:<input id="ttl" type="text" name="ttl" value="5" class="update"> sec <label><input type="checkbox" name="stoplog" id="stoplog"> stop log refresh</label><br>
+FILTER:<input id="s" type="text" name="s" value="" class="update"><button id="del_filter">del</button> keyword<br>
+MAX:<input id="max" type="text" name="max" value="1000" class="update"> lines<br>
+BOXSIZE:<input id="box" type="text" name="box" value="10" class="update"> lines<br>
+
+<select id="result" size="10"></select>
+<div id="detail"></div>
+</div>
+</body>
+</html>

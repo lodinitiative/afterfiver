@@ -1,0 +1,46 @@
+.m-loading{
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	transition: opacity 250ms ease;
+
+	&__loader {
+		box-sizing: border-box;
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		padding: 35px;
+		background-color: rgba(0,0,0,0.6);
+		border-radius: 20px;
+		box-shadow: 0 0 10px rgba(0,0,0,0.3)
+	}
+
+	&__loader-inner{
+		width: 100%;
+		height: 100%;
+	}
+
+	@at-root{
+		.js-show-loading & {
+			opacity: 1;
+		}
+	}
+
+	@at-root{
+		.js-show-loading .container{
+			pointer-events: none !important;
+		}
+	}
+}

@@ -1,0 +1,158 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic);
+@import "colors";
+@import "mixins";
+@import "normalize";
+
+* {
+	font-family: inherit;
+	max-height: 99999999em; // fontsize fix for chrome
+	//-webkit-tap-highlight-color: rgba(255,255,255,0.5);
+}
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+html {
+	font-size: 10px;
+}
+
+body {
+
+	font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "Meiryo UI", "メイリオ", "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size: 2.6rem;
+
+	color: $textColor;
+	background: $bgColor;
+	width: 640px;
+	margin: 0 auto;
+	line-height: 1;
+	user-select: none;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 56px;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+	//-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+ruby {
+	padding: 0 0.5em;
+}
+
+rt {
+	font-size: 70%;
+}
+
+.container {
+	position: relative;
+
+	min-height: 100%;
+	width: 640px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+
+	> * {
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: auto;
+	}
+}
+
+.page-head {
+}
+
+.page-body {
+	flex-grow: 1;
+
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+}
+
+.content {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	height: 100%;
+	width: 100%;
+
+	background: #fff;
+
+	> * {
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: auto;
+	}
+}
+
+.content-head {
+	background: #fff;
+}
+
+.content-body {
+	position: relative;
+	flex-grow: 1;
+	overflow: hidden;
+
+	&__scroll {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	&__inner {
+		@include cf();
+	}
+}
+
+.copyright {
+	text-align: center;
+	color: #000;
+	background: #fff;
+	padding: 10px 0;
+	font-size: 1.6rem;
+
+	a{
+		color: #2a88e8;
+	}
+}
+
+@import "m-loading";
+@import "m-menu";
+@import "m-ui";
+@import "m-list";
+@import "m-sub-navigation";
+@import "m-modal";
+
+@import "afterfiver/start";
+@import "afterfiver/list";
+@import "afterfiver/list-map";
+@import "afterfiver/spot";
+@import "afterfiver/spot-map";
+
+@import "capture/start";
+@import "capture/detail";
+
+@import "tv/start";
+
+@import "slick";

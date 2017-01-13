@@ -1,0 +1,165 @@
+.content-tv--start {
+	h1 {
+		font-size: 4.6rem;
+		font-weight: bold;
+		text-align: left;
+		padding: 40px 15px 30px;
+
+		span {
+			position: relative;
+			top: -0.2em;
+			display: inline-block;
+			color: #fff;
+			background-color: #d42800;
+			font-size: 2.6rem;
+			padding: 10px 20px;
+			margin-right: 5px;
+			vertical-align: middle;
+		}
+	}
+	h2 {
+		font-size: 3.0rem;
+		color: #db2727;
+		margin-bottom: 20px;
+	}
+
+	.l-section {
+		border-top: 1px solid #000000;
+		padding: 30px 20px;
+		margin: auto;
+	}
+
+	.l-section-part {
+		margin: 30px 0;
+	}
+
+	.__screenshot {
+
+		margin-bottom: 30px;
+
+		&__caption {
+			margin: 20px;
+			font-size: 3.0rem;
+		}
+
+		.__thumb {
+			position: relative;
+			width: 640px;
+			height: 360px;
+			background: {
+				position: center center;
+				size: contain;
+				repeat: no-repeat;
+				image: url(../img/no-image.jpg);
+				color: #e3e3e3;
+			}
+			.__thumb-image {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background: {
+					position: center center;
+					size: cover;
+					repeat: no-repeat;
+				}
+			}
+		}
+	}
+
+	.__next-video {
+
+		padding: 25px 15px;
+		background: #ececec;
+		margin-bottom: 40px;
+
+		&__head {
+			h3 {
+				font-size: 3.2rem;
+				font-weight: bold;
+				text-align: left;
+				padding: 0 0 15px;
+
+				span {
+					position: relative;
+					top: -0.2em;
+					display: inline-block;
+					color: #fff;
+					background-color: #d42800;
+					font-size: 2.6rem;
+					padding: 10px 20px;
+					margin-right: 5px;
+					vertical-align: middle;
+				}
+			}
+		}
+
+		&__body {
+			display: flex;
+			> * {
+				flex-grow: 0;
+				flex-shrink: 0;
+				flex-basis: auto;
+
+				&:first-child {
+					margin-right: 20px;
+				}
+
+				&:last-child {
+					flex-shrink: 1;
+				}
+			}
+
+			.__thumb {
+				position: relative;
+				width: 255px;
+				height: 169px;
+				background: {
+					position: center center;
+					size: cover;
+					repeat: no-repeat;
+					image: url(../img/no-image.jpg);
+				}
+				.__thumb-image {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					background: {
+						position: center center;
+						size: cover;
+						repeat: no-repeat;
+					}
+				}
+			}
+
+		}
+
+		&__time {
+			font-size: 2.4rem;
+			text-align: center;
+			line-height: 3.6rem;
+			background-color: #cfcfcf;
+		}
+	}
+
+	.__twitter {
+
+		border-top: 1px solid #000000;
+		padding: 30px 60px 0;
+		margin-bottom: 40px;
+
+		&__head {
+			color: #fff;
+			background: #429ee3 url(../img/tv/twitter-logo.png) left top no-repeat;
+			font-size: 3.0rem;
+			line-height: 51px;
+			padding-left: 67px;
+		}
+
+		&__body {
+			border: 1px solid #dcdcdc;
+		}
+	}
+
+	@import "../video-list";
+
+}

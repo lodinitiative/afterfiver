@@ -1,0 +1,67 @@
+.m-sub-navigation {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	border-bottom: 1px solid #d6d6d6;
+
+	> * {
+		flex-basis: 100%;
+		flex-grow: 1;
+		flex-shrink: 1;
+
+		&:nth-child(1) {
+			text-align: left;
+		}
+		&:nth-child(2) {
+			text-align: center;
+			white-space: nowrap;
+		}
+		&:nth-child(3) {
+			text-align: right;
+		}
+	}
+
+	.__link-back{
+		cursor: pointer;
+		&:before {
+			content: "";
+			display: inline-block;
+			width: 38px;
+			height: 38px;
+			background: url(../img/icon-back.svg) center center no-repeat;
+			background-size: contain;
+			margin-right: 10px;
+		}
+	}
+
+	.__link-map {
+
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 50px;
+
+		color: #fff;
+		background: #f89a00;
+		line-height: 1;
+
+		padding: 0 25px 0 15px;
+		border-radius: 3px;
+		font-size: 2.8rem;
+		cursor: pointer;
+
+		&:before{
+			content: "";
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			margin-right: 10px;
+			line-height: 1;
+
+			background: url(../img/icon-map-pin.svg) center center no-repeat;
+			background-size: contain;
+
+		}
+	}
+}

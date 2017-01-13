@@ -1,0 +1,186 @@
+.content-fiver--spot {
+
+	h2 {
+		font-size: 3.0rem;
+		color: #db2727;
+		margin-bottom: 20px;
+	}
+
+	.l-section {
+		border-top: 1px solid #000000;
+		padding: 30px 20px;
+		margin: auto;
+	}
+
+	.l-section-part {
+		margin: 30px 0;
+	}
+
+	.__slider {
+
+		.__slide-indicator {
+			text-align: center;
+			padding: 15px 0;
+		}
+
+		.__thumb{
+			position: relative;
+			width: 640px;
+			height: 360px;
+			cursor: pointer;
+			background: {
+				position: center center;
+				size: contain;
+				repeat: no-repeat;
+				image: url(../img/no-image.jpg);
+				color: #e3e3e3;
+			}
+
+			.__thumb-image {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background: {
+					position: center center;
+					size: cover;
+					repeat: no-repeat;
+				}
+			}
+		}
+
+
+	}
+
+	.__image-search {
+		overflow: hidden;
+		overflow-x: auto;
+		white-space: nowrap;
+
+		a {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			margin-right: 8px;
+			cursor: pointer;
+
+			background: {
+				position: center center;
+				size: cover;
+				repeat: no-repeat;
+				image: url(../img/no-image.jpg);
+			}
+
+			.__thumb-image {
+				width: 187px;
+				height: 139px;
+				background: {
+					position: center center;
+					size: cover;
+					repeat: no-repeat;
+				}
+			}
+		}
+
+	}
+
+	.__spot-description {
+
+		padding: 30px 15px;
+
+		.__item-head {
+			display: flex;
+			margin-bottom: 30px;
+
+			> * {
+				flex-basis: auto;
+				flex-grow: 0;
+				flex-shrink: 0;
+
+				&:first-child {
+					width: 112px;
+					margin-right: 15px;
+					margin-bottom: 10px;
+
+					.__thumb-image {
+						width: 112px;
+						height: 84px;
+						background: {
+							position: center center;
+							size: cover;
+							repeat: no-repeat;
+							image: url(../img/no-image.jpg);
+						}
+					}
+				}
+
+				&:last-child {
+					width: 483px;
+				}
+			}
+		}
+
+		.__item-title {
+			font-size: 4.6rem;
+			font-weight: bold;
+			margin-top: 12px;
+			line-height: 1;
+			box-sizing: border-box;
+			max-width: 100%;
+		}
+
+		.__item-category {
+			display: block;
+			color: #fff;
+			background: #db2727;
+			height: 2.8rem;
+			line-height: 2.8rem;
+			font-size: 2.4rem;
+			width: 150px;
+			text-align: center;
+			border-radius: 5px;
+		}
+
+		.__item-body {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+
+			> * {
+				box-sizing: border-box;
+				flex-basis: 48%;
+
+				&:nth-child(-n+2) {
+					border-bottom: 1px solid gray;
+					padding-bottom: 10px;
+				}
+				&:nth-child(n+3) {
+					padding-top: 10px;
+				}
+			}
+
+			dl, dd, dt {
+				margin: 0;
+				padding: 0;
+			}
+
+			dl {
+				display: flex;
+			}
+
+			dt {
+				font-size: 2.4rem;
+				font-weight: bold;
+				margin-right: 0.5em;
+			}
+
+			dd {
+				font-size: 2.8rem;
+			}
+		}
+	}
+
+	@import "../recipe-list";
+
+	@import "../video-list";
+
+}

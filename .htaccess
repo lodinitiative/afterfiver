@@ -1,6 +1,0 @@
-# Redirect
-Redirect permanent /index.htm http://lodc.jp/
-#Redirect permanent /index.htm http://lodc.jp/2015/concrete5/index.php
-
-Header set Cache-Control "max-age=0"
-Header set Expires "Mon, 26 Jul 1997 05:00:00 GMT"

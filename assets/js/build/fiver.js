@@ -60,7 +60,7 @@ var Fiver = {
   googleCustomsearchApi: 'https://www.googleapis.com/customsearch/v1?',
   googleGeocodeApi: 'https://maps.google.com/maps/api/geocode/json?',
   googleApiKey: {
-    serverId: '********',
+    serverId: 'AIzaSyD_0b44Bf1darDmqSrRD6N0pr3dCwzlYPc',
     engineId: '********'
   },
 
@@ -304,7 +304,7 @@ var Fiver = {
     this.setInterviewContent();
 
     // 全ての通信が終わったら画面表示
-    self.setHtmlSpotImageFromKeyword(spotData.name_ja).then(
+ /*   self.setHtmlSpotImageFromKeyword(spotData.name_ja).then(
         self.setHtmlSpotVideoFromKeyword(),
         self.setHtmlSpotVideoFromKeyword()
     ).then(
@@ -312,9 +312,9 @@ var Fiver = {
         self.setHtmlSpotRecipeFromKeyword()
     ).then(function() {
       display();
-    }, function() {
+    }, function() {*/
       display();
-    });
+    //});
   },
 
   // 撮影用の機能「能福寺」のコンテンツ詳細で表示
@@ -649,7 +649,7 @@ var Fiver = {
     google.maps.event.addListener(marker, 'click', function() {
       var html = "<b>" + name + "</b> <br/>" ;
       self.infoWindow.setContent(html);
-      self.infoWindow.open(this.map,marker);  
+      self.infoWindow.open(this.map,marker);
     });
 
     // add marker
@@ -1004,7 +1004,7 @@ var Fiver = {
       });
     return dfd.promise();
   },
-  fetchGoogleImgFromKeyword: function(keyword) {
+/*  fetchGoogleImgFromKeyword: function(keyword) {
     var self = Fiver;
     var dfd = $.Deferred();
     var query = {
@@ -1017,9 +1017,9 @@ var Fiver = {
       imgSize:    'medium',
       imgType:    'photo',
       searchType: 'image',
-    };
+    };*/
 
-    self.fetchAjax({url: self.googleCustomsearchApi + $.param(query)},
+/*    self.fetchAjax({url: self.googleCustomsearchApi + $.param(query)},
       function(data) {
         if (data.items && data.items.length) {
           dfd.resolve(data);
@@ -1031,7 +1031,7 @@ var Fiver = {
         dfd.reject(data);
       });
     return dfd.promise();
-  },
+  },*/
   fetchRelatedRecipeFromKeyword: function(keyword) {
     var self = Fiver;
     var dfd = $.Deferred();

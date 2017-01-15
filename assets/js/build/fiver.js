@@ -20,7 +20,7 @@ var Fiver = {
   startLocationDom: $('#current-location-start__textarea'),
   destLocationDom: $('#current-location-dest__textarea'),
 
-  rooturl: 'http://afterfiver.lodosaka.jp/',  //add20161218
+//  rooturl: 'http://afterfiver.lodosaka.jp/',  //add20161218
 
   // option
   drawItemNum: 5000,
@@ -125,7 +125,7 @@ var Fiver = {
   init: function() {
     var self = this;
 
-    self.sendLog(self.logEvent.tab);
+    //#LOG記録削除 self.sendLog(self.logEvent.tab);
 
     // 初回のみ実行
     if (!this.firstView) {
@@ -248,9 +248,10 @@ var Fiver = {
     for (var i = 0; i < items.length; i++) {
       spots.push(items[i].place);
     }
+/*#LOG記録削除 
     this.sendLog(this.logEvent.list, {
       spot: spots.join(','),
-    });
+    });*/
   },
   updateListDisplay: function() {
     this.loader(false);
@@ -290,12 +291,13 @@ var Fiver = {
       visibleTgt($('#spot-recipe'), self.spotRecipeData);
       visibleTgt($('#spot-comment'), spotData.comment);
 
+/*#LOG記録削除 
       self.sendLog(self.logEvent.detail, {
         spot: spotData.place,
         keyword: self.settingData.plan,
         recipes: self.retDataItemIdList($('#spot-recipe-list a')),
         VOD: self.retDataItemIdList($('#spot-related-video-list a')),
-      });
+      });*/
     };
 
     this.loader(true);
@@ -722,13 +724,14 @@ var Fiver = {
       $('#m-list-sort').val('');
       self.setSettingData(self.makeSearchSettingData());
 
+/*//#LOG記録削除 
       // 検索ログ送信
       self.sendLog(self.logEvent.search, {
         start: self.settingData.start.location,
         destination: self.settingData.dest.location,
         duration: self.settingData.dest.time,
         plan: self.settingData.plan,
-      });
+      });*/
 
       self.loader(true);
 
@@ -872,14 +875,14 @@ var Fiver = {
     // click spot web site
     $('#spot-web a').on('click', function(){
       var spotData = self.retSelectedSpotData();
-
+/*//#LOG記録削除 
       self.sendLog(self.logEvent.weblink, {
         spot: spotData.place,
         keyword: self.settingData.plan,
         link: $(this).attr('href'),
         recipes: self.retDataItemIdList($('#spot-recipe-list a')),
         VOD: self.retDataItemIdList($('#spot-related-video-list a')),
-      });
+      });*/
     });
 
     $('.map-app-modal-link').on('click', function(){
@@ -941,7 +944,7 @@ var Fiver = {
         param.VOD = id;
       }
 
-      self.sendLog(event, param);
+//#LOG記録削除       self.sendLog(event, param);
     });
   },
 
@@ -959,7 +962,7 @@ var Fiver = {
       this.error();
     }
   },
-
+/*#LOG記録削除 
   sendShowMapLog: function() {
     var spotData = this.retSelectedSpotData();
     this.sendLog(this.logEvent.map, {
@@ -972,7 +975,7 @@ var Fiver = {
     this.sendLog(event, {
       spot: spotData.place
     });
-  },
+  },*/
 
   error: function(str) {
     this.loader(false);
@@ -2118,7 +2121,7 @@ if (!lat || !long) {
     }
     hm = h + '.' + _m;
     return parseFloat(hm);
-  },
+  }/*/#LOG記録削除 ,
   sendLog: function(event, param) {
     var sendParam = {
       tab: 'AfterFiver',
@@ -2129,5 +2132,5 @@ if (!lat || !long) {
       sendParam = $.extend(sendParam, param);
     }
     sbc(sendParam);
-  }
+  }*/
 };

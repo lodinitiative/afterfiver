@@ -9,6 +9,10 @@ AfterFiverは、[ISWC2016](http://iswc2016.semanticweb.org)用に、[ISWC2016＠
 - master: ISWC2016神戸版
 - AfterFiverOsaka: 汎用版のサンプル 大阪版
 
+## 使い方
+
+doc/以下を参照のこと。
+
 ## ライセンス
 
 MITライセンス

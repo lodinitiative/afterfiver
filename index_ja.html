@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=640, user-scalable=no">
@@ -151,16 +151,16 @@
 											<div class="_layout2">
 												<h3>利用できる時間</h3>
 												<select name="destArriveBy">
-													<option value="30">30 min</option>
-													<option value="60">60 min</option>
-													<option value="90">90 min</option>
-													<option value="120" selected>120 min</option>
-													<option value="150">150 min</option>
-													<option value="180">180 min</option>
-													<option value="210">210 min</option>
-													<option value="240">240 min</option>
-													<option value="270">270 min</option>
-													<option value="300">300 min</option>
+													<option value="30">30分</option>
+													<option value="60">60分</option>
+													<option value="90">90分</option>
+													<option value="120" selected>120分</option>
+													<option value="150">150分</option>
+													<option value="180">180分</option>
+													<option value="210">210分</option>
+													<option value="240">240分</option>
+													<option value="270">270分</option>
+													<option value="300">300分</option>
 												</select>
 											</div>
 										</div>
@@ -258,13 +258,13 @@ OPTIONAL{?place foaf:homepage ?web}
 								</div>
 								<div>
 									<select id="m-list-sort" name="sort">
-										<option value="">Sort</option>
-										<option value="duration">Duration</option>
-										<option value="distance">Distance</option>
+										<option value="">表示順</option>
+										<option value="duration">所要時間</option>
+										<option value="distance">距離</option>
 									</select>
 								</div>
 								<div>
-									<a class="__link-map" href="#">Map</a>
+									<a class="__link-map" href="#">地図</a>
 								</div>
 							</div>
 						</div>
@@ -279,7 +279,7 @@ OPTIONAL{?place foaf:homepage ?web}
 
 									<div class="spot-list-more">
 										<a class="m-ui-button m-ui-button--more">
-											Show more
+											もっと見る
 										</a>
 									</div>
 
@@ -299,8 +299,8 @@ OPTIONAL{?place foaf:homepage ?web}
 						<div class="content-head">
 							<div class="m-sub-navigation">
 								<div><a class="__link-back" href="#"></a></div>
-								<div>Spot Information</div>
-								<div><a class="__link-map" href="#">Map</a></div>
+								<div>スポット情報</div>
+								<div><a class="__link-map" href="#">地図</a></div>
 							</div>
 						</div>
 
@@ -325,37 +325,37 @@ OPTIONAL{?place foaf:homepage ?web}
 										</div>
 										<div class="__item-body">
 											<dl>
-												<dt>Duration</dt>
-												<dd id="spot-duration">hours</dd>
+												<dt>所要時間</dt>
+												<dd id="spot-duration">時間</dd>
 											</dl>
 											<dl>
-												<dt>Distance</dt>
+												<dt>距離</dt>
 												<dd id="spot-distance">km</dd>
 											</dl>
 											<dl>
-												<dt>Stay Time</dt>
-												<dd id="spot-time">mins</dd>
+												<dt>平均滞在時間</dt>
+												<dd id="spot-time">分</dd>
 											</dl>
 											<dl>
-												<dt>Average price</dt>
-												<dd id="spot-average-price">JPY</dd>
+												<dt>平均予算</dt>
+												<dd id="spot-average-price">円</dd>
 											</dl>
 										</div>
 									</div>
 
 									<div id="spot-comment" class="l-section">
-										<h2>spot comment</h2>
+										<h2>スポットコメント</h2>
 										<p id="spot-comment-desc">
 										</p>
 									</div>
 
 									<div id="spot-web" class="l-section __web-link">
-											<h2>web site</h2>
+											<h2>webサイト</h2>
 											<div><a href="#" target="_blank"></a></div>
 									</div>
 
 									<div id="spot-search-image" class="l-section">
-										<h2>Image Search from Google</h2>
+										<h2>画像検索 from Google</h2>
 										<div id="spot_image-search" class="__image-search">
 											<a href="#"><img src="" alt="" /></a>
 										</div>
@@ -387,8 +387,8 @@ OPTIONAL{?place foaf:homepage ?web}
 
 									<div>
 										<div class="__page-navigation">
-											<a href="#" class="m-button--map-app" target="_blank">View in map app</a>
-											<a href="#" id="m-button--list" class="m-button--list">List</a>
+											<a href="#" class="m-button--map-app" target="_blank">地図アプリで見る</a>
+											<a href="#" id="m-button--list" class="m-button--list">一覧</a>
 										</div>
 
 										<div id="__map-list" class="__map">
@@ -457,8 +457,8 @@ OPTIONAL{?place foaf:homepage ?web}
 
 									<div>
 										<div class="__page-navigation">
-											<a href="#" class="m-button--map-app" target="_blank">View in map app</a>
-											<a href="#" id="m-button--spot" class="m-button--list">spot</a>
+											<a href="#" class="m-button--map-app" target="_blank">地図アプリで見る</a>
+											<a href="#" id="m-button--spot" class="m-button--list">スポット</a>
 										</div>
 
 										<div id="__map-spot" class="__map">
@@ -799,11 +799,11 @@ OPTIONAL{?place foaf:homepage ?web}
 		<div class="__fiver-map-modal">
 			<div class="__fiver-map-modal__inner">
 				<div class="__fiver-map-modal__buttons">
-					<a href="#" class="map-app-modal-link" href="" target="_blank">from start location to waypoint</a>
-					<a href="#" class="map-app-modal-link" href="" target="_blank">from waypoint to destination</a>
+					<a href="#" class="map-app-modal-link" href="" target="_blank">出発地点→到着地点</a>
+					<a href="#" class="map-app-modal-link" href="" target="_blank">到着地点→出発地点</a>
 				</div>
 				<div class="__fiver-map-modal__close">
-					<a href="javascript:">Close</a>
+					<a href="javascript:">閉じる</a>
 				</div>
 			</div>
 		</div>
@@ -822,6 +822,7 @@ OPTIONAL{?place foaf:homepage ?web}
 <!--	<script src="assets/js/libs/log.js"></script>-->
 <!--	<script src="assets/js/build/caputure.js"></script>-->
 	<script src="assets/js/build/fiver.js"></script>
+	<script src="assets/js/build/fiver_jp.js"></script>
 <!--	<script src="assets/js/build/tv.js"></script>-->
 	<script src="assets/js/build/index.js"></script>
 

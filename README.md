@@ -3,6 +3,7 @@
 AfterFiverは、[ISWC2016](http://iswc2016.semanticweb.org)用に、[ISWC2016＠KOBE連携ハッカソン](http://www.sigswo.org/papers/iswc2016hackathon)を通して開発されたインバウンド対応観光アプリです。
 
 AfterFiver汎用版は、他の地域用にも開発できるように大阪のデータを例として整備しています。
+大阪版は http://lodosaka.jp/AfterFiverOsaka/ で試すことができます。
 
 ## ブランチ
 

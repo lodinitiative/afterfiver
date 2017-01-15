@@ -204,7 +204,7 @@
 											</a>
 										</div>
 									</div>
-		<form method="get" action="http://lod.hozo.jp/repositories/AfterFiverKOBE#query/d/" target="result" id="spot-lod-api" style="display:none" >
+		<form method="get" action="http://lod.hozo.jp/repositories/AfterFiverOsaka#query/d/" target="result" id="spot-lod-api" style="display:none" >
 			<textarea name="query" cols="100" rows="30"  hidden >
 prefix ishk: <http://data.lodosaka.jp/iswc2016hack/property#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -214,7 +214,6 @@ prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
 prefix schema: <http://schema.org/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 select  (STR(?place_name) as ?name) (STR(?place_address) as ?address) (STR(?place_comment) as ?comment) (STR(?place_img_url) as ?img_url)  (STR(?place_fee) as ?fee)   (STR(?place_openingHours) as ?openingHours) (STR(?place_keyword) as ?keyword) (STR(?place_stay_time) as ?stay_time) (STR(?lat) as ?place_lat) (STR(?long) as ?place_long) (STR(?place_category) as ?category) ?place (STR(?place_name_ja) as ?name_ja) ?vod ?vod_sc ?web
-FROM <http://data.lodosaka.jp/iswc2016hack/sightseeing>
 where
 {
 ?place rdfs:label ?place_name_ja.
